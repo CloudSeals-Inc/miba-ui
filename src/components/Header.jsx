@@ -60,6 +60,7 @@ export default function Header() {
                             <Link to="/ai-insights" style={{ color: 'var(--dark)', fontWeight: '500' }}><i className="fa-solid fa-sparkles"></i> AI Insights</Link>
                             <Link to="/how-it-works">How It Works</Link>
                             <Link to="/contact">Contact</Link>
+                            <Link to="/report" style={{ color: 'var(--primary)', fontWeight: '700' }}><i className="fa-solid fa-camera"></i> Report</Link>
                         </div>
 
                         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
