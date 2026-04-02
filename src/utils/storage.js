@@ -14,14 +14,19 @@ export function logoutUser() {
 }
 
 export async function getReports() {
-    const raw = localStorage.getItem('miba_reports') || '[]';
-    return JSON.parse(raw);
+    const response = await fetch(`${API_BASE_URL}/reports`);
+    if (!response.ok) return [];
+    return response.json();
 }
 
 export async function saveReport(report) {
-    const reports = await getReports();
-    reports.push(report);
-    localStorage.setItem('miba_reports', JSON.stringify(reports));
+    const response = await fetch(`${API_BASE_URL}/reports`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(report)
+    });
+    if (!response.ok) throw new Error(`Report submission failed: ${response.status}`);
+    return response.json();
 }
 
 export function calculateUserStats(phone, reports) {
