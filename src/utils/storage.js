@@ -13,10 +13,27 @@ export function logoutUser() {
     localStorage.removeItem('miba_user');
 }
 
+const STATUS_MAP = { OPEN: 'pending', ASSIGNED: 'assigned', CLOSED: 'cleaned' };
+
 export async function getReports() {
     const response = await fetch(`${API_BASE_URL}/reports`);
     if (!response.ok) return [];
-    return response.json();
+    const data = await response.json();
+    return (Array.isArray(data) ? data : []).map(wo => ({
+        id: wo.work_order_id || wo.id,
+        workOrderId: wo.work_order_id || wo.id,
+        status: STATUS_MAP[wo.status] || wo.status?.toLowerCase() || 'pending',
+        location: wo.location?.lat != null
+            ? `Lat: ${wo.location.lat.toFixed(4)}, Lng: ${wo.location.lng.toFixed(4)}`
+            : (wo.location || 'Unknown'),
+        description: wo.classification?.ai_narrative?.split('\n')[0] || wo.description || '',
+        imageUrl: wo.imageUrl || '',
+        afterImageUrl: wo.afterImageUrl || null,
+        aiCategory: wo.classification?.dominant_category_name || wo.aiCategory || '',
+        date: wo.created_at || wo.date,
+        reporterPhone: wo.reporter_id || wo.reporterPhone,
+        rating: wo.rating || null,
+    }));
 }
 
 export async function saveReport(report) {
