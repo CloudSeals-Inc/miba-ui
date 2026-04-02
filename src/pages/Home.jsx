@@ -1,6 +1,17 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { API_BASE_URL } from '../utils/storage';
 
 export default function Home() {
+    const [userCount, setUserCount] = useState(0);
+
+    useEffect(() => {
+        fetch(`${API_BASE_URL}/reports`)
+            .then(res => res.json())
+            .then(data => setUserCount(Array.isArray(data) ? data.length : 0))
+            .catch(() => {});
+    }, []);
+
     return (
         <div className="page-container animate-fade">
             {/* Hero Section */}
@@ -18,7 +29,7 @@ export default function Home() {
                         </h1>
                         
                         <p className="hero-text animate-slide-up" style={{ animationDelay: '0.1s' }}>
-                            Spot waste, report it, and watch us take action. Join 2,000+ citizens who are already building a cleaner, greener India.
+                            Spot waste, report it, and watch us take action. Join {userCount > 0 ? `${userCount}+` : 'the growing community of'} citizens building a cleaner, greener India.
                         </p>
                         
                         <div className="hero-actions animate-slide-up" style={{ animationDelay: '0.2s' }}>
@@ -34,7 +45,7 @@ export default function Home() {
                             <div style={{ display: 'flex' }}>
                                 <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&w=40&h=40&fit=crop" style={{ width: '40px', height: '40px', borderRadius: '50%', border: '3px solid white', objectFit: 'cover' }} alt="User" />
                                 <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&w=40&h=40&fit=crop" style={{ width: '40px', height: '40px', borderRadius: '50%', border: '3px solid white', objectFit: 'cover', marginLeft: '-15px' }} alt="User" />
-                                <div style={{ width: '40px', height: '40px', borderRadius: '50%', border: '3px solid white', background: 'var(--white)', color: 'var(--primary-dark)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', fontWeight: '800', marginLeft: '-15px' }}>+2k</div>
+                                <div style={{ width: '40px', height: '40px', borderRadius: '50%', border: '3px solid white', background: 'var(--white)', color: 'var(--primary-dark)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', fontWeight: '800', marginLeft: '-15px' }}>{userCount > 0 ? `+${userCount}` : '🌱'}</div>
                             </div>
                             <p style={{ fontSize: '0.875rem', fontWeight: '600', color: 'var(--gray-700)', margin: 0 }}>
                                 Join the active movement
@@ -82,6 +93,16 @@ export default function Home() {
                             <h3 style={{ marginBottom: 'var(--space-3)' }}>3. Earn Credits</h3>
                             <p style={{ fontSize: '0.9375rem', color: 'var(--gray-600)' }}>
                                 Earn MIBA credits for every report. Be recognized for your contribution to the nation.
+                            </p>
+                        </div>
+
+                        <div className="card" style={{ textAlign: 'center' }}>
+                            <div style={{ width: '60px', height: '60px', borderRadius: 'var(--radius-xl)', background: '#e8f5e9', color: '#2e7d32', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', margin: '0 auto var(--space-6) auto' }}>
+                                <i className="fa-solid fa-leaf"></i>
+                            </div>
+                            <h3 style={{ marginBottom: 'var(--space-3)' }}>4. Carbon Impact</h3>
+                            <p style={{ fontSize: '0.9375rem', color: 'var(--gray-600)' }}>
+                                Every verified pickup earns MIBA tokens and logs CO₂e avoided. Value shown instantly in ₹.
                             </p>
                         </div>
                     </div>

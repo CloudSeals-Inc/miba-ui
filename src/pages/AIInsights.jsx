@@ -5,7 +5,12 @@ import { API_BASE_URL } from '../utils/storage';
 // ─── SVG Sparkline Chart ──────────────────────────────────────────────────────
 function SparklineChart({ data }) {
     const W = 600, H = 120, PAD = 20;
-    if (!data || data.length === 0) return null;
+    if (!data || data.length === 0) return (
+        <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '8px', color: '#94a3b8' }}>
+            <i className="fa-solid fa-chart-line" style={{ fontSize: '2rem', opacity: 0.3 }}></i>
+            <p style={{ fontSize: '0.8rem', fontWeight: '600' }}>Awaiting first reports</p>
+        </div>
+    );
     const counts = data.map(d => d.count);
     const maxV = Math.max(...counts, 1);
     const points = data.map((d, i) => {
@@ -225,7 +230,7 @@ export default function AIInsights() {
                                 Environmental <span style={{ color: '#34d399' }}>Analytics</span>
                             </h1>
                             <p style={{ color: '#94a3b8', fontSize: '1rem', maxWidth: '500px' }}>
-                                4 specialist Gemini agents analyzing {summary.total || 0} waste reports in real-time to generate strategic environmental intelligence.
+                                WasteKI Multi-Agent Intelligence · 6 specialist agents analyzing {summary.total || 0} waste reports in real-time to generate strategic environmental intelligence.
                             </p>
                         </div>
                         <button onClick={fetchAnalytics} style={{ background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.3)', color: '#34d399', padding: '10px 20px', borderRadius: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: '700', fontSize: '0.85rem', flexShrink: 0 }}>
@@ -259,6 +264,13 @@ export default function AIInsights() {
                     <MetricCard icon="fa-check-double" label="Cleaned" value={`${summary.cleanedPercentage || 0}%`} sub={`${summary.cleanedCount || 0} of ${summary.total || 0} cleared`} color="#22c55e" />
                     <MetricCard icon="fa-fire-flame-curved" label="Critical" value={summary.severities?.['Critical Action Required'] || 0} sub="Urgent attention needed" color="#ef4444" />
                     <MetricCard icon="fa-leaf" label="CO₂ Offset Est." value={`${summary.totalCo2 || 0}kg`} sub="Potential carbon saved" color="#0ea5e9" />
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '32px' }}>
+                    <MetricCard icon="fa-users" label="Collectors Active" value={summary.collectorsActive || 0} sub="Registered Green Champions" color="#8b5cf6" />
+                    <MetricCard icon="fa-coins" label="Tokens Issued" value={summary.tokensIssued || 0} sub="MIBA tokens minted" color="#f59e0b" />
+                    <MetricCard icon="fa-cloud" label="Carbon Credits" value={`${summary.totalCo2 || 0}kg`} sub="CO₂e logged" color="#06b6d4" />
+                    <MetricCard icon="fa-indian-rupee-sign" label="Total UPI Payouts" value={`₹${summary.totalPayouts || 0}`} sub="Collector earnings" color="#10b981" />
                 </div>
 
                 {/* ── OVERVIEW TAB ────────────────────────────────────────── */}
@@ -361,7 +373,7 @@ export default function AIInsights() {
                                 <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', flexShrink: 0 }}>🧠</div>
                                 <div>
                                     <p style={{ color: '#34d399', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '1px', marginBottom: '8px' }}>SYNTHESIS AGENT · STRATEGIC OUTLOOK</p>
-                                    <p style={{ color: '#e2e8f0', fontSize: '1rem', lineHeight: '1.7', fontStyle: 'italic' }}>{aiInsights || 'Generating strategic insights...'}</p>
+                                    <p style={{ color: '#e2e8f0', fontSize: '1rem', lineHeight: '1.7', fontStyle: 'italic' }}>{aiInsights || 'Submit more waste reports to generate AI insights on environmental patterns.'}</p>
                                 </div>
                             </div>
                         </div>
@@ -374,10 +386,10 @@ export default function AIInsights() {
                         <div style={{ background: '#fff', borderRadius: '16px', padding: '20px', border: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
                             <div>
                                 <h3 style={{ fontSize: '1rem', fontWeight: '800', color: '#0f172a', marginBottom: '4px' }}>Multi-Agent System</h3>
-                                <p style={{ fontSize: '0.8rem', color: '#94a3b8' }}>3 specialist agents run in parallel via <code style={{ background: '#f0fdf4', color: '#166534', padding: '2px 6px', borderRadius: '4px' }}>asyncio.gather()</code></p>
+                                <p style={{ fontSize: '0.8rem', color: '#94a3b8' }}>6 specialist agents run in parallel via <code style={{ background: '#f0fdf4', color: '#166534', padding: '2px 6px', borderRadius: '4px' }}>asyncio.gather()</code></p>
                             </div>
                             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                                {['Trend Agent', 'Severity Agent', 'City Agent', 'Synthesis Agent'].map(a => (
+                                {['Collector Agent', 'Waste Quality Agent', 'Traceability Agent', 'Valuation Agent', 'Carbon Accounting Agent', 'Tokenization Agent'].map(a => (
                                     <span key={a} style={{ background: '#f0fdf4', color: '#16a34a', fontSize: '0.65rem', fontWeight: '800', padding: '4px 10px', borderRadius: '99px', border: '1px solid #d1fae5', display: 'flex', alignItems: 'center', gap: '4px' }}>
                                         <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#16a34a' }} /> {a}
                                     </span>

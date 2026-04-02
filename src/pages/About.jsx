@@ -43,7 +43,7 @@ export default function About() {
                         <span className="pill-warning" style={{ marginBottom: 'var(--space-4)', display: 'inline-block' }}>Innovation</span>
                         <h2 style={{ marginBottom: 'var(--space-4)' }}>Powered by <span style={{ color: 'var(--secondary)' }}>Vision AI</span></h2>
                         <p style={{ color: 'var(--gray-600)', marginBottom: 'var(--space-6)' }}>
-                            We leverage state-of-the-art **Gemini 2.0 Flash** to automatically screen every report. Our system identifies waste—from plastic to hazardous debris—instantly.
+                            Powered by <strong>WasteKI</strong> computer vision. YOLOv9 + EfficientNet-B3 identifies 16 waste types from a single photo — plastic, metal, organic, e-waste, and more — with severity score and ₹ value shown instantly.
                         </p>
                         <ul style={{ listStyle: 'none', padding: 0 }}>
                             <li style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
@@ -62,8 +62,9 @@ export default function About() {
                             <p style={{ color: 'var(--success)' }}>[OK] Detection Active</p>
                             <p style={{ marginTop: '20px' }}>Analyzing image data...</p>
                             <div style={{ border: '1px solid var(--gray-700)', padding: '10px', marginTop: '10px' }}>
-                                <p>Detected: Plastic Waste</p>
-                                <p>Severity: High</p>
+                                <p>Detected: W02 Rigid Plastic</p>
+                                <p>Severity: 8 / 10</p>
+                                <p style={{ color: '#fbbf24' }}>Value: ₹13/kg · Tokens: ₹8</p>
                             </div>
                         </div>
                     </div>
