@@ -7,5 +7,6 @@ if [ -n "$VITE_API_URL" ]; then
 fi
 echo "};" >> /usr/share/nginx/html/config.js
 
-# Now start Nginx
-exec "$@"
+# Delegate to the official nginx entrypoint so nginx.conf.template gets processed
+# (substitutes ${PORT} -> 8080 before nginx starts)
+exec /docker-entrypoint.sh "$@"
