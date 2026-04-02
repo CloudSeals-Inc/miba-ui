@@ -1,0 +1,245 @@
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getUserSession, getReports, API_BASE_URL } from '../utils/storage';
+
+
+export default function CollectorDashboard() {
+    const navigate = useNavigate();
+    const [user, setUser] = useState(null);
+    const [assignedReports, setAssignedReports] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [activeTask, setActiveTask] = useState(null);
+    const [afterImage, setAfterImage] = useState('');
+    const [isScanning, setIsScanning] = useState(false);
+    const [isVerifying, setIsVerifying] = useState(false);
+
+    useEffect(() => {
+        const session = getUserSession();
+        if (!session) {
+            navigate('/register');
+        } else {
+            setUser(session);
+            loadTasks();
+            // Auto refresh every 30 seconds
+            const interval = setInterval(loadTasks, 30000);
+            return () => clearInterval(interval);
+        }
+    }, [navigate]);
+
+    const loadTasks = async () => {
+        setIsLoading(true);
+        const data = await getReports();
+        // Case-insensitive status check
+        setAssignedReports(data.filter(r => 
+            r.status.toLowerCase() === 'pending' || 
+            r.status.toLowerCase() === 'assigned'
+        ));
+        setIsLoading(false);
+    };
+
+    const startVerification = (task) => {
+        setActiveTask(task);
+        setIsScanning(true);
+    };
+
+    const handleScanComplete = () => {
+        setIsScanning(false);
+        setIsVerifying(true);
+    };
+
+    const handleAfterPhoto = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            const reader = new FileReader();
+            reader.onload = (event) => setAfterImage(event.target.result);
+            reader.readAsDataURL(e.target.files[0]);
+        }
+    };
+
+    const calculateDistance = (lat1, lon1, lat2, lon2) => {
+        const R = 6371e3; // Earth radius in meters
+        const φ1 = lat1 * Math.PI/180;
+        const φ2 = lat2 * Math.PI/180;
+        const Δφ = (lat2-lat1) * Math.PI/180;
+        const Δλ = (lon2-lon1) * Math.PI/180;
+
+        const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+                  Math.cos(φ1) * Math.cos(φ2) *
+                  Math.sin(Δλ/2) * Math.sin(Δλ/2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        return R * c; // in meters
+    };
+
+    const completeWorkOrder = async () => {
+        if (!afterImage) return alert("Please capture the After Photo first!");
+        
+        setIsLoading(true);
+        // Step 1: Verify Location
+        if (!navigator.geolocation) {
+             alert("Geolocation is not supported by this browser.");
+             setIsLoading(false);
+             return;
+        }
+
+        navigator.geolocation.getCurrentPosition(async (pos) => {
+            const currentLat = pos.coords.latitude;
+            const currentLng = pos.coords.longitude;
+
+            // Extract original coords from string like "Lat: 17.53, Lng: 78.50"
+            const originalCoords = activeTask.location.match(/(-?\d+\.\d+)/g);
+            if (!originalCoords || originalCoords.length < 2) {
+                // If it's a manual address string, we skip hard validation or use simple alert
+                console.log("Skipping hard GPS check for non-coordinate location:", activeTask.location);
+                return await proceedWithCompletion();
+            }
+
+            const dist = calculateDistance(currentLat, currentLng, parseFloat(originalCoords[0]), parseFloat(originalCoords[1]));
+            console.log(`Collector distance from target: ${dist.toFixed(2)} meters`);
+
+            if (dist > 300) { // 300 meters threshold
+                alert(`Location Verification Failed!\n\nYou must be at the cleanup site to submit. You are currently ${dist.toFixed(0)} meters away.`);
+                setIsLoading(false);
+            } else {
+                await proceedWithCompletion();
+            }
+        }, (err) => {
+            alert("Could not verify your location. Please enable GPS.");
+            setIsLoading(false);
+        });
+    };
+
+    const proceedWithCompletion = async () => {
+        try {
+            const res = await fetch(`${API_BASE_URL}/reports/${activeTask.id}/pickup`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ afterImageUrl: afterImage })
+            });
+            if (res.ok) {
+                alert("Pickup Verified! ₹150 added to your wallet.");
+                setActiveTask(null);
+                setAfterImage('');
+                setIsVerifying(false);
+                loadTasks();
+            } else {
+                const errorData = await res.json();
+                alert(errorData.detail || "Submission failed. Please ensure the 'After' photo matches the 'Before' location.");
+            }
+        } catch (err) { alert("Network error. Please check your connection."); }
+        finally { setIsLoading(false); }
+    };
+
+    const openInMaps = (location) => {
+        // Extract numbers from "Lat: 17.53, Lng: 78.50"
+        const coords = location.match(/(-?\d+\.\d+)/g);
+        const query = coords ? coords.join(',') : location;
+        window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`, '_blank');
+    };
+
+    if (!user) return null;
+
+    return (
+        <div className="page-container animate-fade" style={{ background: '#0e1117', color: '#e6edf3', minHeight: '100vh' }}>
+            <div className="container" style={{ maxWidth: '600px', padding: 'var(--space-8) var(--space-4)' }}>
+                {/* Header Stats */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', background: '#161b22', padding: '20px', borderRadius: '20px', border: '1px solid #30363d' }}>
+                    <div>
+                        <p style={{ fontSize: '0.75rem', opacity: 0.6, textTransform: 'uppercase', fontWeight: '800' }}>My Earnings</p>
+                        <h2 style={{ color: 'var(--primary)', fontSize: '2rem' }}>₹{user.wallet || 1450}</h2>
+                    </div>
+                    <div style={{ textAlign: 'right' }}>
+                        <button onClick={loadTasks} className="btn" style={{ background: 'transparent', color: 'var(--primary)', border: '1px solid var(--primary)', padding: '5px 15px', borderRadius: '15px', fontSize: '0.7rem' }}>
+                            <i className={`fa-solid fa-arrows-rotate ${isLoading ? 'fa-spin' : ''}`}></i> Refresh
+                        </button>
+                    </div>
+                </div>
+
+                {isScanning ? (
+                    <div className="card animate-slide-up" style={{ background: '#161b22', border: '1px solid #30363d', textAlign: 'center', padding: '40px 20px' }}>
+                        <div style={{ marginBottom: '2rem' }}>
+                            <i className="fa-solid fa-clipboard-check" style={{ fontSize: '4rem', color: 'var(--primary)', marginBottom: '1rem' }}></i>
+                            <h3 style={{ color: 'white' }}>Verify Work Order</h3>
+                        </div>
+                        
+                        <div style={{ background: '#0d1117', padding: '25px', borderRadius: '15px', border: '1px solid #30363d', marginBottom: '2rem' }}>
+                            <p style={{ fontSize: '0.75rem', opacity: 0.5, textTransform: 'uppercase', marginBottom: '10px' }}>CITIZEN WORK ORDER ID</p>
+                            <h2 style={{ color: 'var(--primary)', letterSpacing: '2px' }}>{activeTask?.workOrderId}</h2>
+                        </div>
+
+                        <p style={{ fontSize: '0.85rem', color: '#8b949e', marginBottom: '2rem' }}>Please confirm the ID matches the citizen's report before proceeding.</p>
+                        <button onClick={handleScanComplete} className="btn btn-primary" style={{ width: '100%', padding: '1.25rem' }}>ID MATCHES - CONTINUE</button>
+                    </div>
+                ) : isVerifying ? (
+                    <div className="card animate-slide-up" style={{ background: '#161b22', border: '1px solid #30363d' }}>
+                        <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+                            <div style={{ flex: 1 }}>
+                                <p style={{ fontSize: '0.65rem', fontWeight: '800', opacity: 0.5, marginBottom: '5px' }}>BEFORE</p>
+                                <img src={activeTask.imageUrl} style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '10px' }} alt="Before" />
+                            </div>
+                            <div style={{ flex: 1 }}>
+                                <p style={{ fontSize: '0.65rem', fontWeight: '800', color: 'var(--primary)', marginBottom: '5px' }}>AFTER (UPLOAD)</p>
+                                {!afterImage ? (
+                                    <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '120px', width: '100%', background: '#0d1117', border: '2px dashed #30363d', borderRadius: '10px', cursor: 'pointer' }}>
+                                        <i className="fa-solid fa-camera"></i>
+                                        <input type="file" accept="image/*" onChange={handleAfterPhoto} style={{ display: 'none' }} />
+                                    </label>
+                                ) : (
+                                    <img src={afterImage} style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '10px' }} alt="After" />
+                                )}
+                            </div>
+                        </div>
+                        
+                        <h3 style={{ color: 'white', marginBottom: '0.5rem' }}>Verify Cleanup</h3>
+                        <p style={{ fontSize: '0.85rem', color: '#8b949e', marginBottom: '1.5rem' }}>Submit the 'After' photo to complete this work order.</p>
+
+                        <button onClick={completeWorkOrder} className="btn btn-primary" disabled={isLoading} style={{ width: '100%', padding: '1.25rem' }}>
+                            {isLoading ? 'VERIFYING LOCATION...' : 'COMPLETE & COLLECT ₹150'}
+                        </button>
+                    </div>
+                ) : (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                        <h3 style={{ fontSize: '1rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                            <i className="fa-solid fa-map-location-dot" style={{ color: 'var(--primary)' }}></i> Nearby Open Tasks ({assignedReports.length})
+                        </h3>
+                        {assignedReports.length === 0 ? (
+                            <div style={{ textAlign: 'center', padding: '3rem', opacity: 0.4 }}>
+                                <i className="fa-solid fa-box-open" style={{ fontSize: '3rem', marginBottom: '1rem' }}></i>
+                                <p>No tasks found. Try refreshing.</p>
+                            </div>
+                        ) : assignedReports.map(task => (
+                            <div key={task.id} className="card" style={{ background: '#161b22', border: '1px solid #30363d', color: 'white', padding: 0, overflow: 'hidden' }}>
+                                <div style={{ display: 'flex' }}>
+                                    <img src={task.imageUrl} style={{ width: '140px', height: '160px', objectFit: 'cover' }} alt="Waste" />
+                                    <div style={{ flex: 1, padding: '15px' }}>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                            <span style={{ color: 'var(--primary)', fontWeight: '800', fontSize: '0.75rem' }}>{task.workOrderId || 'WO-PENDING'}</span>
+                                            <span style={{ fontSize: '0.6rem', color: task.severity?.includes('Critical') ? '#f85149' : '#3fb950', background: 'rgba(0,0,0,0.3)', padding: '2px 8px', borderRadius: '10px' }}>{task.severity}</span>
+                                        </div>
+                                        <p style={{ fontSize: '0.85rem', fontWeight: '700', marginBottom: '5px' }}><i className="fa-solid fa-location-dot" style={{ color: 'red', fontSize: '0.7rem' }}></i> {task.location}</p>
+                                        <p style={{ fontSize: '0.75rem', opacity: 0.6, marginBottom: '15px' }}>{task.city}</p>
+                                        
+                                        <div style={{ display: 'flex', gap: '8px' }}>
+                                            <button onClick={() => openInMaps(task.location)} className="btn btn-outline" style={{ flex: 1, borderColor: '#30363d', color: 'white', fontSize: '0.65rem', height: '32px', minHeight: '32px' }}>
+                                                MAPS
+                                            </button>
+                                            <button onClick={() => startVerification(task)} className="btn btn-primary" style={{ flex: 2, fontSize: '0.65rem', height: '32px', minHeight: '32px' }}>
+                                                COLLECT NOW
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+            
+            <style>{`
+                @keyframes scanMove {
+                    0% { top: 20%; }
+                    50% { top: 80%; }
+                    100% { top: 20%; }
+                }
+            `}</style>
+        </div>
+    );
+}

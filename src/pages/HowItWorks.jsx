@@ -1,0 +1,77 @@
+import { Link } from 'react-router-dom';
+
+export default function HowItWorks() {
+    return (
+        <div className="page-container animate-fade">
+            <section className="container" style={{ padding: 'var(--space-12) var(--space-4)' }}>
+                <div style={{ textAlign: 'center', marginBottom: 'var(--space-12)' }}>
+                    <h1 style={{ marginBottom: 'var(--space-2)' }}>How It Works</h1>
+                    <p style={{ color: 'var(--gray-600)', maxWidth: '600px', margin: '0 auto' }}>A simple 3-step process to beautify India while earning rewards.</p>
+                </div>
+
+                <div className="grid grid-cols-1 grid-cols-3" style={{ marginBottom: 'var(--space-12)' }}>
+                    <div className="card" style={{ textAlign: 'center' }}>
+                        <div style={{ width: '64px', height: '64px', background: 'var(--primary-light)', color: 'var(--primary)', borderRadius: 'var(--radius-xl)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', margin: '0 auto var(--space-6)' }}>
+                            <i className="fa-solid fa-camera"></i>
+                        </div>
+                        <h3>1. Spot & Report</h3>
+                        <p style={{ color: 'var(--gray-600)', fontSize: '0.9375rem' }}>
+                            Snapshot any cleanliness issue. Your report is shared with our cleanup task force.
+                        </p>
+                    </div>
+
+                    <div className="card" style={{ textAlign: 'center', borderTop: '4px solid var(--secondary)' }}>
+                        <div style={{ width: '64px', height: '64px', background: '#fff3e0', color: 'var(--secondary)', borderRadius: 'var(--radius-xl)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', margin: '0 auto var(--space-6)' }}>
+                            <i className="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <h3>2. Rapid Action</h3>
+                        <p style={{ color: 'var(--gray-600)', fontSize: '0.9375rem' }}>
+                            We coordinate with local municipalities to dispatch cleaning crews promptly.
+                        </p>
+                    </div>
+
+                    <div className="card" style={{ textAlign: 'center' }}>
+                        <div style={{ width: '64px', height: '64px', background: 'var(--primary-light)', color: 'var(--primary-dark)', borderRadius: 'var(--radius-xl)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', margin: '0 auto var(--space-6)' }}>
+                            <i className="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <h3>3. Restore</h3>
+                        <p style={{ color: 'var(--gray-600)', fontSize: '0.9375rem' }}>
+                            We transform the area with cleaning and greenery to ensure it stays beautiful.
+                        </p>
+                    </div>
+                </div>
+
+                <div className="card" style={{ background: 'var(--gray-50)', border: 'none' }}>
+                    <h2 style={{ textAlign: 'center', marginBottom: 'var(--space-8)' }}>Why Participate?</h2>
+                    <div className="grid grid-cols-1 grid-cols-3">
+                        <div style={{ display: 'flex', gap: '15px' }}>
+                            <i className="fa-solid fa-star" style={{ color: 'var(--secondary)', fontSize: '1.25rem' }}></i>
+                            <div>
+                                <h4 style={{ marginBottom: '5px' }}>Earn Credits</h4>
+                                <p style={{ fontSize: '0.875rem', color: 'var(--gray-600)' }}>Get recognition for every valid report submitted.</p>
+                            </div>
+                        </div>
+                        <div style={{ display: 'flex', gap: '15px' }}>
+                            <i className="fa-solid fa-shield-heart" style={{ color: 'var(--primary)', fontSize: '1.25rem' }}></i>
+                            <div>
+                                <h4 style={{ marginBottom: '5px' }}>National Pride</h4>
+                                <p style={{ fontSize: '0.875rem', color: 'var(--gray-600)' }}>Take ownership of your neighborhood environment.</p>
+                            </div>
+                        </div>
+                        <div style={{ display: 'flex', gap: '15px' }}>
+                            <i className="fa-solid fa-chart-line" style={{ color: 'var(--info)', fontSize: '1.25rem' }}></i>
+                            <div>
+                                <h4 style={{ marginBottom: '5px' }}>Track Impact</h4>
+                                <p style={{ fontSize: '0.875rem', color: 'var(--gray-600)' }}>See real-time stats of overall cleanup efforts.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style={{ textAlign: 'center', marginTop: 'var(--space-12)' }}>
+                        <Link to="/report" className="btn btn-primary">Start Reporting Now</Link>
+                    </div>
+                </div>
+            </section>
+        </div>
+    );
+}
