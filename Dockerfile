@@ -14,10 +14,16 @@ RUN npm run build
 FROM nginx:stable-alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 
+# Copy the config generator and entrypoint
+COPY generate-config.sh /usr/local/bin/generate-config.sh
+RUN chmod +x /usr/local/bin/generate-config.sh
+
 # Use the template to handle the PORT environment variable
 COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 
 ENV PORT=8080
 EXPOSE 8080
 
+# Use the script to generate config.js before starting Nginx
+ENTRYPOINT ["/usr/local/bin/generate-config.sh"]
 CMD ["nginx", "-g", "daemon off;"]

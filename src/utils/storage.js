@@ -1,4 +1,4 @@
-export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+export const API_BASE_URL = (window.MIBA_CONFIG && window.MIBA_CONFIG.VITE_API_URL) || import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
 
 export function saveUserSession(user) {
     localStorage.setItem('miba_user', JSON.stringify(user));
