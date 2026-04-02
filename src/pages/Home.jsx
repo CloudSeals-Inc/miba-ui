@@ -6,9 +6,9 @@ export default function Home() {
     const [userCount, setUserCount] = useState(0);
 
     useEffect(() => {
-        fetch(`${API_BASE_URL}/reports`)
+        fetch(`${API_BASE_URL}/stats`)
             .then(res => res.json())
-            .then(data => setUserCount(Array.isArray(data) ? data.length : 0))
+            .then(data => setUserCount(data.user_count || 0))
             .catch(() => {});
     }, []);
 
