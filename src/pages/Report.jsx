@@ -205,7 +205,20 @@ export default function Report() {
                                 ) : aiAnalysis ? (
                                     <>
                                         <p style={{ color: '#0ea5e9', marginBottom: '8px', fontFamily: 'monospace' }}>{"> "} Analysis complete.</p>
-                                        <div style={{ color: '#10b981', fontWeight: 'bold', marginBottom: '16px', fontFamily: 'monospace' }}>[DETECTION SUCCESS]</div>
+                                        <div style={{ color: '#10b981', fontWeight: 'bold', marginBottom: '8px', fontFamily: 'monospace' }}>[DETECTION SUCCESS]</div>
+                                        {aiAnalysis.grand_total_value_inr > 0 && (
+                                            <div style={{ background: 'linear-gradient(135deg, #064e3b, #065f46)', borderRadius: '12px', padding: '14px 18px', marginBottom: '8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                                <div>
+                                                    <p style={{ color: '#6ee7b7', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '1px', margin: 0 }}>ESTIMATED VALUE</p>
+                                                    <p style={{ color: '#fff', fontSize: '1.5rem', fontWeight: '900', margin: '2px 0 0' }}>₹{aiAnalysis.grand_total_value_inr.toFixed(2)}</p>
+                                                </div>
+                                                <div style={{ textAlign: 'right', fontSize: '0.7rem', color: '#a7f3d0' }}>
+                                                    <p style={{ margin: 0 }}>Scrap ₹{((aiAnalysis.total_scrap_value_inr_min + aiAnalysis.total_scrap_value_inr_max) / 2).toFixed(2)}</p>
+                                                    <p style={{ margin: 0 }}>Tokens ₹{aiAnalysis.total_token_value_inr?.toFixed(2)}</p>
+                                                    <p style={{ margin: 0 }}>Carbon ₹{aiAnalysis.total_carbon_credit_inr?.toFixed(2)}</p>
+                                                </div>
+                                            </div>
+                                        )}
                                         
                                         <div style={{ background: '#fff', borderRadius: '15px', padding: '20px', border: '1px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.01)', display: 'flex', flexDirection: 'column', gap: '20px' }}>
                                             {/* AI Overview Section */}
