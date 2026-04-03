@@ -103,7 +103,7 @@ export default function CollectorDashboard() {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', background: '#161b22', padding: '20px', borderRadius: '20px', border: '1px solid #30363d' }}>
                     <div>
                         <p style={{ fontSize: '0.75rem', opacity: 0.6, textTransform: 'uppercase', fontWeight: '800' }}>My Earnings</p>
-                        <h2 style={{ color: 'var(--primary)', fontSize: '2rem' }}>₹{user.wallet || 1450}</h2>
+                        <h2 style={{ color: 'var(--primary)', fontSize: '2rem' }}>₹{user.wallet || 0}</h2>
                     </div>
                     <div style={{ textAlign: 'right' }}>
                         <button onClick={loadTasks} className="btn" style={{ background: 'transparent', color: 'var(--primary)', border: '1px solid var(--primary)', padding: '5px 15px', borderRadius: '15px', fontSize: '0.7rem' }}>
