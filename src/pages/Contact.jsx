@@ -34,7 +34,7 @@ export default function Contact() {
                             <div style={{ color: 'var(--primary)', fontSize: '1.25rem' }}><i className="fa-solid fa-envelope"></i></div>
                             <div>
                                 <h4 style={{ marginBottom: '4px' }}>Email Us</h4>
-                                <p style={{ fontSize: '0.875rem', color: 'var(--gray-600)' }}>srinivas@cloudseals.com</p>
+                                <p style={{ fontSize: '0.875rem', color: 'var(--gray-600)' }}>support@miba.in</p>
                             </div>
                         </div>
 
