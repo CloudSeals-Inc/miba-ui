@@ -116,7 +116,7 @@ export default function Register() {
                                 type="text"
                                 value={name}
                                 onChange={e => setName(e.target.value)}
-                                placeholder="Your full name"
+                                placeholder=""
                                 required
                                 autoFocus
                                 style={{ width:'100%', padding:'13px 14px', border:'1.5px solid #e2e8f0', borderRadius:'12px', fontSize:'1rem', outline:'none', background:'#f8fafc', boxSizing:'border-box' }}
@@ -136,7 +136,7 @@ export default function Register() {
                                     type="tel"
                                     value={phone}
                                     onChange={e => setPhone(e.target.value.replace(/\D/g,'').slice(0,10))}
-                                    placeholder="98XXXXXXXX"
+                                    placeholder=""
                                     required
                                     style={{ width:'100%', padding:'13px 14px 13px 50px', border:'1.5px solid #e2e8f0', borderRadius:'12px', fontSize:'1rem', outline:'none', background:'#f8fafc', boxSizing:'border-box' }}
                                     onFocus={e => { e.target.style.borderColor='#10b981'; e.target.style.boxShadow='0 0 0 3px rgba(16,185,129,0.15)'; }}
@@ -154,7 +154,7 @@ export default function Register() {
                                 type="email"
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
-                                placeholder="you@gmail.com"
+                                placeholder=""
                                 required
                                 style={{ width:'100%', padding:'13px 14px', border:'1.5px solid #e2e8f0', borderRadius:'12px', fontSize:'1rem', outline:'none', background:'#f8fafc', boxSizing:'border-box' }}
                                 onFocus={e => { e.target.style.borderColor='#10b981'; e.target.style.boxShadow='0 0 0 3px rgba(16,185,129,0.15)'; }}

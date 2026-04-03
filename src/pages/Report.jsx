@@ -278,15 +278,15 @@ export default function Report() {
                                         <i className="fa-solid fa-location-crosshairs"></i> {isGettingLocation ? 'Locating...' : 'Real Location'}
                                     </button>
                                 </div>
-                                <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Street name or landmark" required />
+                                <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} required />
                             </div>
                             <div className="form-group">
                                 <label>City / Area</label>
-                                <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="Mumbai, etc." required />
+                                <input type="text" value={city} onChange={(e) => setCity(e.target.value)} required />
                             </div>
                             <div className="form-group">
                                 <label>Description</label>
-                                <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Optional details..." rows="2" />
+                                <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows="2" />
                             </div>
                             <button type="submit" className="btn btn-primary" disabled={isSubmitting} style={{ width: '100%', marginTop: '1rem', padding: '1.25rem' }}>
                                 {isSubmitting ? 'Processing...' : 'Submit Report'}

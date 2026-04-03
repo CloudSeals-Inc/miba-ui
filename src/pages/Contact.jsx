@@ -62,15 +62,15 @@ export default function Contact() {
                             <form onSubmit={handleSubmit} className="grid grid-cols-1">
                                 <div className="form-group">
                                     <label>Your Name</label>
-                                    <input type="text" placeholder="Full Name" required />
+                                    <input type="text" required />
                                 </div>
                                 <div className="form-group">
                                     <label>Email Address</label>
-                                    <input type="email" placeholder="email@example.com" required />
+                                    <input type="email" required />
                                 </div>
                                 <div className="form-group">
                                     <label>Message</label>
-                                    <textarea placeholder="How can we help?" required rows="4"></textarea>
+                                    <textarea required rows="4"></textarea>
                                 </div>
                                 <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>Send Message</button>
                             </form>

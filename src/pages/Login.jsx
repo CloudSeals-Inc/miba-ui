@@ -82,7 +82,7 @@ export default function Login() {
                                     type="tel"
                                     value={phone}
                                     onChange={e => setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
-                                    placeholder="98XXXXXXXX"
+                                    placeholder=""
                                     required
                                     autoFocus
                                     style={{ width: '100%', padding: '13px 14px 13px 48px', border: '1.5px solid #e2e8f0', borderRadius: '12px', fontSize: '1rem', outline: 'none', transition: 'border-color 0.2s, box-shadow 0.2s', background: '#f8fafc' }}
