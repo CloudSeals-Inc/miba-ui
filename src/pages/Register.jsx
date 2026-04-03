@@ -4,6 +4,7 @@ import { saveUserSession, getUserSession, API_BASE_URL } from '../utils/storage'
 
 export default function Register() {
     const navigate = useNavigate();
+    const [name, setName]   = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [role, setRole]   = useState('citizen');
@@ -20,13 +21,13 @@ export default function Register() {
     const handleRegister = async (e) => {
         e.preventDefault();
         setError('');
-        if (!phone || !email) return;
+        if (!name || !phone || !email) return;
         setIsLoading(true);
         try {
             const response = await fetch(`${API_BASE_URL}/auth/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name: phone, phone, email, role }),
+                body: JSON.stringify({ name, phone, email, role }),
             });
             const data = await response.json();
             if (response.ok) {
@@ -106,6 +107,24 @@ export default function Register() {
                             </div>
                         </div>
 
+                        {/* Name */}
+                        <div style={{ marginBottom:'1rem' }}>
+                            <label style={{ display:'block', fontWeight:'700', fontSize:'0.82rem', color:'#374151', marginBottom:'6px' }}>
+                                <i className="fa-solid fa-user" style={{ color:'#10b981', marginRight:'6px' }} />Full Name
+                            </label>
+                            <input
+                                type="text"
+                                value={name}
+                                onChange={e => setName(e.target.value)}
+                                placeholder="Your full name"
+                                required
+                                autoFocus
+                                style={{ width:'100%', padding:'13px 14px', border:'1.5px solid #e2e8f0', borderRadius:'12px', fontSize:'1rem', outline:'none', background:'#f8fafc', boxSizing:'border-box' }}
+                                onFocus={e => { e.target.style.borderColor='#10b981'; e.target.style.boxShadow='0 0 0 3px rgba(16,185,129,0.15)'; }}
+                                onBlur={e => { e.target.style.borderColor='#e2e8f0'; e.target.style.boxShadow='none'; }}
+                            />
+                        </div>
+
                         {/* Phone */}
                         <div style={{ marginBottom:'1rem' }}>
                             <label style={{ display:'block', fontWeight:'700', fontSize:'0.82rem', color:'#374151', marginBottom:'6px' }}>
@@ -119,7 +138,6 @@ export default function Register() {
                                     onChange={e => setPhone(e.target.value.replace(/\D/g,'').slice(0,10))}
                                     placeholder="98XXXXXXXX"
                                     required
-                                    autoFocus
                                     style={{ width:'100%', padding:'13px 14px 13px 50px', border:'1.5px solid #e2e8f0', borderRadius:'12px', fontSize:'1rem', outline:'none', background:'#f8fafc', boxSizing:'border-box' }}
                                     onFocus={e => { e.target.style.borderColor='#10b981'; e.target.style.boxShadow='0 0 0 3px rgba(16,185,129,0.15)'; }}
                                     onBlur={e => { e.target.style.borderColor='#e2e8f0'; e.target.style.boxShadow='none'; }}
