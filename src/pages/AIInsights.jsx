@@ -214,7 +214,7 @@ export default function AIInsights() {
     const TABS = [
         { id: 'overview', label: 'Overview', icon: 'fa-chart-pie' },
         { id: 'agents', label: 'AI Agents', icon: 'fa-microchip' },
-        { id: 'chat', label: 'Ask AI', icon: 'fa-comments' },
+        // { id: 'chat', label: 'Ask AI', icon: 'fa-comments' },
     ];
 
     return (
@@ -431,7 +431,7 @@ export default function AIInsights() {
                     </div>
                 )}
 
-                {/* ── CHAT TAB ────────────────────────────────────────────── */}
+                {/* ── CHAT TAB (Commented out) ──────────────────────────────────────────────
                 {activeTab === 'chat' && (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '800px', margin: '0 auto' }}>
                         <div style={{ background: '#fff', borderRadius: '20px', padding: '20px', border: '1px solid #f1f5f9' }}>
@@ -476,7 +476,6 @@ export default function AIInsights() {
                                 <div ref={chatEndRef} />
                             </div>
 
-                            {/* Suggestions */}
                             <div style={{ padding: '0 24px 12px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                                 {['Which city has the most reports?', 'What is the cleanup rate?', 'Most common waste type?'].map(q => (
                                     <button key={q} onClick={() => { setChatInput(q); }} style={{ background: '#f0fdf4', border: '1px solid #d1fae5', color: '#166534', fontSize: '0.7rem', fontWeight: '700', padding: '5px 12px', borderRadius: '99px', cursor: 'pointer' }}>
@@ -500,6 +499,7 @@ export default function AIInsights() {
                         </div>
                     </div>
                 )}
+                */}
             </div>
 
             <style>{`
