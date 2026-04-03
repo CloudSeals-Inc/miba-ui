@@ -71,7 +71,7 @@ export default function CollectorDashboard() {
             const res = await fetch(`${API_BASE_URL}/reports/${activeTask.id}/pickup`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ afterImageUrl: afterImage })
+                body: JSON.stringify({ afterImageUrl: afterImage, collector_id: user?.phone || 'anonymous' })
             });
             if (res.ok) {
                 setCompletedTask(activeTask);
