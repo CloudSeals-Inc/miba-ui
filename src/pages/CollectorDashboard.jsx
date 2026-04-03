@@ -60,56 +60,10 @@ export default function CollectorDashboard() {
         }
     };
 
-    const calculateDistance = (lat1, lon1, lat2, lon2) => {
-        const R = 6371e3; // Earth radius in meters
-        const φ1 = lat1 * Math.PI / 180;
-        const φ2 = lat2 * Math.PI / 180;
-        const Δφ = (lat2 - lat1) * Math.PI / 180;
-        const Δλ = (lon2 - lon1) * Math.PI / 180;
-
-        const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-            Math.cos(φ1) * Math.cos(φ2) *
-            Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return R * c; // in meters
-    };
-
     const completeWorkOrder = async () => {
         if (!afterImage) return alert("Please capture the After Photo first!");
-
         setIsLoading(true);
-        // Step 1: Verify Location
-        if (!navigator.geolocation) {
-            alert("Geolocation is not supported by this browser.");
-            setIsLoading(false);
-            return;
-        }
-
-        navigator.geolocation.getCurrentPosition(async (pos) => {
-            const currentLat = pos.coords.latitude;
-            const currentLng = pos.coords.longitude;
-
-            // Extract original coords from string like "Lat: 17.53, Lng: 78.50"
-            const originalCoords = activeTask.location.match(/(-?\d+\.\d+)/g);
-            if (!originalCoords || originalCoords.length < 2) {
-                // If it's a manual address string, we skip hard validation or use simple alert
-                console.log("Skipping hard GPS check for non-coordinate location:", activeTask.location);
-                return await proceedWithCompletion();
-            }
-
-            const dist = calculateDistance(currentLat, currentLng, parseFloat(originalCoords[0]), parseFloat(originalCoords[1]));
-            console.log(`Collector distance from target: ${dist.toFixed(2)} meters`);
-
-            if (dist > 300) { // 300 meters threshold
-                alert(`Location Verification Failed!\n\nYou must be at the cleanup site to submit. You are currently ${dist.toFixed(0)} meters away.`);
-                setIsLoading(false);
-            } else {
-                await proceedWithCompletion();
-            }
-        }, (err) => {
-            alert("Could not verify your location. Please enable GPS.");
-            setIsLoading(false);
-        });
+        await proceedWithCompletion();
     };
 
     const proceedWithCompletion = async () => {
@@ -206,29 +160,50 @@ export default function CollectorDashboard() {
                             <i className="fa-solid fa-circle-check"></i>
                         </div>
                         <h2 style={{ color: 'white', marginBottom: '8px' }}>Pickup Verified!</h2>
-                        <p style={{ color: '#8b949e', fontSize: '0.9rem', marginBottom: '2rem' }}>Earnings have been distributed as per the MIBA economics model.</p>
+                        <p style={{ color: '#8b949e', fontSize: '0.9rem', marginBottom: '2rem' }}>Earnings distributed as per the MIBA economics model.</p>
 
+                        {/* Waste detection summary */}
+                        {completedTask.aiCategory && (
+                            <div style={{ background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: '12px', padding: '14px 16px', marginBottom: '16px', textAlign: 'left' }}>
+                                <p style={{ fontSize: '0.65rem', color: '#6ee7b7', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '6px' }}>AI Detection</p>
+                                <p style={{ color: 'white', fontWeight: '700', fontSize: '0.9rem', marginBottom: '4px' }}>
+                                    {completedTask.aiCategoryCode && <span style={{ color: '#6ee7b7', marginRight: '6px' }}>{completedTask.aiCategoryCode}</span>}
+                                    {completedTask.aiCategory}
+                                    {completedTask.totalWeightKg > 0 && <span style={{ color: '#8b949e', fontWeight: '500' }}> · {completedTask.totalWeightKg.toFixed(2)} kg</span>}
+                                    {completedTask.severityLabel && <span style={{ color: '#8b949e', fontWeight: '500' }}> · {completedTask.severityLabel}</span>}
+                                </p>
+                                {completedTask.grandTotalInr > 0 && (
+                                    <p style={{ fontSize: '0.8rem', color: '#8b949e', marginTop: '4px' }}>
+                                        Est. value ₹{completedTask.grandTotalInr.toFixed(2)}
+                                        {completedTask.scrapInrMin > 0 && <span> (Scrap ₹{((completedTask.scrapInrMin + completedTask.scrapInrMax) / 2).toFixed(2)}</span>}
+                                        {completedTask.tokenInr > 0 && <span> + Tokens ₹{completedTask.tokenInr.toFixed(2)}</span>}
+                                        {completedTask.carbonInr > 0 && <span> + Carbon ₹{completedTask.carbonInr.toFixed(2)})</span>}
+                                    </p>
+                                )}
+                            </div>
+                        )}
+
+                        {/* Earnings breakdown */}
                         <div style={{ background: '#0d1117', borderRadius: '15px', border: '1px solid #30363d', padding: '24px', marginBottom: '2rem', textAlign: 'left' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '16px', borderBottom: '1px solid #30363d', marginBottom: '16px' }}>
                                 <span style={{ color: '#8b949e', fontWeight: '800', fontSize: '0.7rem', textTransform: 'uppercase' }}>Total Work Value</span>
-                                <span style={{ color: 'white', fontWeight: '900', fontSize: '1.25rem' }}>₹{completedTask.grand_total_value_inr?.toFixed(2) || '150.00'}</span>
+                                <span style={{ color: 'white', fontWeight: '900', fontSize: '1.25rem' }}>₹{(completedTask.grandTotalInr || 0).toFixed(2)}</span>
                             </div>
-
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                                         <span style={{ color: 'var(--primary)', fontWeight: '800', fontSize: '0.85rem' }}>Your share (60%)</span>
                                         <span style={{ color: '#3fb950', fontSize: '0.65rem' }}>Credited to UPI</span>
                                     </div>
-                                    <span style={{ color: 'var(--primary)', fontWeight: '900' }}>₹{((completedTask.grand_total_value_inr || 150) * 0.60).toFixed(2)}</span>
+                                    <span style={{ color: 'var(--primary)', fontWeight: '900' }}>₹{((completedTask.grandTotalInr || 0) * 0.60).toFixed(2)}</span>
                                 </div>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <span style={{ color: '#8b949e', fontSize: '0.85rem' }}>Platform fee (25%)</span>
-                                    <span style={{ color: '#8b949e', fontWeight: '700' }}>₹{((completedTask.grand_total_value_inr || 150) * 0.25).toFixed(2)}</span>
+                                    <span style={{ color: '#8b949e', fontWeight: '700' }}>₹{((completedTask.grandTotalInr || 0) * 0.25).toFixed(2)}</span>
                                 </div>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <span style={{ color: '#8b949e', fontSize: '0.85rem' }}>Municipal share (15%)</span>
-                                    <span style={{ color: '#8b949e', fontWeight: '700' }}>₹{((completedTask.grand_total_value_inr || 150) * 0.15).toFixed(2)}</span>
+                                    <span style={{ color: '#8b949e', fontWeight: '700' }}>₹{((completedTask.grandTotalInr || 0) * 0.15).toFixed(2)}</span>
                                 </div>
                             </div>
                         </div>
