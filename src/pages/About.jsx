@@ -34,7 +34,7 @@ export default function About() {
                     </div>
                     <div style={{ order: 1 }}>
                         <span className="pill-success" style={{ marginBottom: 'var(--space-4)', display: 'inline-block' }}>Proprietary Tech</span>
-                        <h2 style={{ marginBottom: 'var(--space-4)' }}>Powered by <span style={{ color: 'var(--primary)' }}>WasteKI.</span></h2>
+                        <h2 style={{ marginBottom: 'var(--space-4)' }}>Powered by <span style={{ color: 'var(--primary)' }}>WasteKI</span></h2>
                         <p style={{ color: 'var(--gray-600)', marginBottom: 'var(--space-6)', lineHeight: '1.7' }}>
                             Powered by <b>WasteKI</b> computer vision. Our <b>YOLOv9</b> detection engine identifies waste objects in real time. <b>EfficientNet-B3</b> classifies into 16 IndicWaste categories. <b>MiDaS</b> depth estimation calculates volume and weight instantly from a single photo.
                         </p>
