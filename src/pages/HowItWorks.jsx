@@ -50,7 +50,7 @@ export default function HowItWorks() {
                     </div>
                 </div>
 
-                <div className="card" style={{ background: 'var(--gray-50)', border: 'none' }}>
+                <div className="card" style={{ background: 'var(--white)', border: '1px solid var(--gray-100)', borderRadius: 'var(--radius-2xl)', padding: 'var(--space-10)', boxShadow: 'var(--shadow-sm)' }}>
                     <h2 style={{ textAlign: 'center', marginBottom: 'var(--space-8)' }}>Why Participate?</h2>
                     <div className="grid grid-cols-1 grid-cols-3">
                         <div style={{ display: 'flex', gap: '15px' }}>

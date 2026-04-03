@@ -217,23 +217,23 @@ export default function AIInsights() {
     return (
         <div className="page-container" style={{ background: '#f8fafc', minHeight: '100vh' }}>
             {/* ── Hero ─────────────────────────────────────────────────── */}
-            <div style={{ background: 'linear-gradient(135deg, #0f172a 0%, #064e3b 100%)', padding: '48px 24px 80px', position: 'relative', overflow: 'hidden' }}>
-                <div style={{ position: 'absolute', top: '-60px', right: '-60px', width: '300px', height: '300px', borderRadius: '50%', background: 'rgba(16,185,129,0.08)' }} />
-                <div style={{ position: 'absolute', bottom: '-40px', left: '5%', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(59,130,246,0.06)' }} />
+            <div style={{ background: 'var(--white)', borderBottom: '1px solid var(--gray-200)', padding: '48px 24px 80px', position: 'relative', overflow: 'hidden' }}>
+                <div style={{ position: 'absolute', top: '-60px', right: '-60px', width: '300px', height: '300px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(16,185,129,0.06) 0%,transparent 70%)' }} />
+                <div style={{ position: 'absolute', bottom: '-40px', left: '5%', width: '200px', height: '200px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(59,130,246,0.04) 0%,transparent 70%)' }} />
                 <div className="container" style={{ position: 'relative' }}>
                     <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px' }}>
                         <div>
-                            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(16,185,129,0.15)', color: '#34d399', border: '1px solid rgba(16,185,129,0.3)', padding: '6px 14px', borderRadius: '99px', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '1px', marginBottom: '16px' }}>
+                            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'var(--primary-light)', color: 'var(--primary-dark)', border: '1px solid rgba(16,185,129,0.1)', padding: '6px 14px', borderRadius: '99px', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '1px', marginBottom: '16px' }}>
                                 <i className="fa-solid fa-circle" style={{ fontSize: '0.5rem' }}></i> LIVE · MULTI-AGENT INTELLIGENCE
                             </div>
-                            <h1 style={{ color: '#fff', fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', fontWeight: '900', marginBottom: '12px' }}>
-                                Environmental <span style={{ color: '#34d399' }}>Analytics</span>
+                            <h1 style={{ color: 'var(--dark)', fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', fontWeight: '900', marginBottom: '12px' }}>
+                                Environmental <span style={{ color: 'var(--primary)' }}>Analytics</span>
                             </h1>
-                            <p style={{ color: '#94a3b8', fontSize: '1rem', maxWidth: '500px' }}>
+                            <p style={{ color: 'var(--gray-600)', fontSize: '1rem', maxWidth: '500px', lineHeight: 1.6 }}>
                                 WasteKI Multi-Agent Intelligence · 6 specialist agents analyzing {summary.total || 0} waste reports in real-time to generate strategic environmental intelligence.
                             </p>
                         </div>
-                        <button onClick={fetchAnalytics} style={{ background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.3)', color: '#34d399', padding: '10px 20px', borderRadius: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: '700', fontSize: '0.85rem', flexShrink: 0 }}>
+                        <button onClick={fetchAnalytics} style={{ background: 'var(--gray-100)', border: '1px solid var(--gray-200)', color: 'var(--dark)', padding: '10px 20px', borderRadius: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: '700', fontSize: '0.85rem', flexShrink: 0 }}>
                             <i className="fa-solid fa-arrows-rotate"></i> Refresh
                         </button>
                     </div>
@@ -366,14 +366,14 @@ export default function AIInsights() {
                             </div>
                         </div>
 
-                        {/* Synthesis Insight */}
-                        <div style={{ background: 'linear-gradient(135deg, #0f172a 0%, #064e3b 100%)', borderRadius: '20px', padding: '32px', position: 'relative', overflow: 'hidden' }}>
-                            <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(16,185,129,0.08)' }} />
-                            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px', position: 'relative' }}>
-                                <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', flexShrink: 0 }}>🧠</div>
+                        {/* Synthesis Insight - Clean Light Style */}
+                        <div style={{ background: 'var(--white)', border: '1px solid var(--gray-200)', borderRadius: '24px', padding: '32px', position: 'relative', overflow: 'hidden', boxShadow: 'var(--shadow-sm)' }}>
+                            <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '200px', height: '200px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(16,185,129,0.04) 0%,transparent 70%)' }} />
+                            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '20px', position: 'relative' }}>
+                                <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: 'var(--primary-light)', border: '1px solid rgba(16,185,129,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.8rem', flexShrink: 0 }}>🧠</div>
                                 <div>
-                                    <p style={{ color: '#34d399', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '1px', marginBottom: '8px' }}>SYNTHESIS AGENT · STRATEGIC OUTLOOK</p>
-                                    <p style={{ color: '#e2e8f0', fontSize: '1rem', lineHeight: '1.7', fontStyle: 'italic' }}>{aiInsights || 'Submit more waste reports to generate AI insights on environmental patterns.'}</p>
+                                    <p style={{ color: 'var(--primary-dark)', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '1px', marginBottom: '8px', textTransform: 'uppercase' }}>Synthesis Agent · Strategic Outlook</p>
+                                    <p style={{ color: 'var(--gray-800)', fontSize: '1.1rem', lineHeight: '1.7', fontStyle: 'italic', fontWeight: '500' }}>{aiInsights || 'Submit more waste reports to generate AI insights on environmental patterns.'}</p>
                                 </div>
                             </div>
                         </div>

@@ -38,13 +38,13 @@ export default function About() {
                 </div>
 
 
-                {/* Vision Box */}
-                <div className="card" style={{ textAlign: 'center', background: 'var(--primary-dark)', color: 'var(--white)', padding: 'var(--space-12)' }}>
-                    <h2 style={{ color: 'var(--white)', marginBottom: 'var(--space-4)' }}>Our Vision</h2>
-                    <p style={{ maxWidth: '600px', margin: '0 auto var(--space-8) auto', opacity: 0.8 }}>
+                {/* Vision Box - Clean Light Style */}
+                <div className="card" style={{ textAlign: 'center', background: 'var(--white)', border: '1px solid var(--gray-200)', borderRadius: 'var(--radius-2xl)', padding: 'var(--space-12)', boxShadow: 'var(--shadow-lg)' }}>
+                    <h2 style={{ color: 'var(--dark)', marginBottom: 'var(--space-4)' }}>Our Vision</h2>
+                    <p style={{ maxWidth: '600px', margin: '0 auto var(--space-8) auto', color: 'var(--gray-600)', lineHeight: 1.75 }}>
                         We envision an India where every street, park, and public space is free from litter, where every citizen feels a deep sense of ownership.
                     </p>
-                    <Link to="/register" className="btn btn-secondary">Get Involved</Link>
+                    <Link to="/register" className="btn btn-primary" style={{ boxShadow: '0 8px 24px rgba(16,185,129,0.2)' }}>Get Involved</Link>
                 </div>
             </section>
         </div>

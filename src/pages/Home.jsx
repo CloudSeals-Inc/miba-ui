@@ -51,14 +51,15 @@ export default function Home() {
                 HERO — above the fold, investor-first message
             ══════════════════════════════════════════════════ */}
             <section style={{
-                background: 'linear-gradient(145deg, #020d07 0%, #032e18 40%, #064e3b 75%, #065f46 100%)',
-                minHeight: '92vh', display: 'flex', alignItems: 'center',
-                padding: '7rem 0 5rem', position: 'relative', overflow: 'hidden',
+                background: 'var(--white)',
+                minHeight: '88vh', display: 'flex', alignItems: 'center',
+                padding: '6rem 0 4rem', position: 'relative', overflow: 'hidden',
+                borderBottom: '1px solid var(--gray-200)'
             }}>
-                {/* Glow blobs */}
-                <div style={{ position:'absolute', top:'-120px', right:'-80px', width:'600px', height:'600px', borderRadius:'50%', background:'radial-gradient(circle,rgba(16,185,129,0.14) 0%,transparent 65%)', pointerEvents:'none' }} />
-                <div style={{ position:'absolute', bottom:'-80px', left:'-80px', width:'450px', height:'450px', borderRadius:'50%', background:'radial-gradient(circle,rgba(245,158,11,0.09) 0%,transparent 65%)', pointerEvents:'none' }} />
-                <div style={{ position:'absolute', top:'40%', left:'30%', width:'300px', height:'300px', borderRadius:'50%', background:'radial-gradient(circle,rgba(16,185,129,0.06) 0%,transparent 70%)', pointerEvents:'none' }} />
+                {/* Glow blobs - refined for light mode */}
+                <div style={{ position:'absolute', top:'-150px', right:'-100px', width:'700px', height:'700px', borderRadius:'50%', background:'radial-gradient(circle,rgba(16,185,129,0.08) 0%,transparent 65%)', pointerEvents:'none' }} />
+                <div style={{ position:'absolute', bottom:'-100px', left:'-100px', width:'500px', height:'500px', borderRadius:'50%', background:'radial-gradient(circle,rgba(245,158,11,0.06) 0%,transparent 65%)', pointerEvents:'none' }} />
+                <div style={{ position:'absolute', top:'40%', left:'30%', width:'400px', height:'400px', borderRadius:'50%', background:'radial-gradient(circle,rgba(16,185,129,0.04) 0%,transparent 70%)', pointerEvents:'none' }} />
 
                 <div className="container" style={{ position:'relative', zIndex:1 }}>
                     <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'4rem', alignItems:'center' }}>
@@ -70,14 +71,14 @@ export default function Home() {
                                 Smart Sustainability Platform
                             </div>
 
-                            <h1 style={{ fontSize:'clamp(2.6rem,5vw,4.2rem)', fontWeight:'900', lineHeight:1.05, color:'#fff', fontFamily:"'Outfit',sans-serif", marginBottom:'1.5rem', letterSpacing:'-0.02em' }}>
+                            <h1 style={{ fontSize:'clamp(2.6rem,5vw,4.2rem)', fontWeight:'900', lineHeight:1.05, color:'var(--dark)', fontFamily:"'Outfit',sans-serif", marginBottom:'1.5rem', letterSpacing:'-0.02em' }}>
                                 Make India<br />
-                                <span style={{ background:'linear-gradient(90deg,#34d399 0%,#6ee7b7 50%,#fbbf24 100%)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>
+                                <span style={{ background:'linear-gradient(90deg,#059669 0%,#10b981 50%,#f59e0b 100%)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>
                                     Beautiful Again.
                                 </span>
                             </h1>
 
-                            <p style={{ fontSize:'1.1rem', color:'rgba(255,255,255,0.65)', lineHeight:1.75, marginBottom:'2.5rem', maxWidth:'500px' }}>
+                            <p style={{ fontSize:'1.1rem', color:'var(--gray-600)', lineHeight:1.75, marginBottom:'2.5rem', maxWidth:'500px' }}>
                                 MIBA turns every piece of unprocessed waste into a structured data event — with AI-verified category, weight, ₹ scrap value, carbon credit, and a municipal work order. All in under 3 seconds.
                             </p>
 
@@ -87,9 +88,9 @@ export default function Home() {
                                     onMouseLeave={e=>{e.currentTarget.style.transform='';e.currentTarget.style.boxShadow='0 8px 28px rgba(16,185,129,0.4)'}}>
                                     <i className="fa-solid fa-camera" /> Try Live Demo
                                 </Link>
-                                <Link to="/about" style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'rgba(255,255,255,0.07)', border:'1px solid rgba(255,255,255,0.2)', color:'#fff', fontWeight:'600', fontSize:'0.95rem', padding:'14px 26px', borderRadius:'12px', backdropFilter:'blur(8px)', textDecoration:'none', transition:'background 0.2s' }}
-                                    onMouseEnter={e=>e.currentTarget.style.background='rgba(255,255,255,0.14)'}
-                                    onMouseLeave={e=>e.currentTarget.style.background='rgba(255,255,255,0.07)'}>
+                                <Link to="/about" style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'var(--gray-100)', border:'1px solid var(--gray-200)', color:'var(--dark)', fontWeight:'600', fontSize:'0.95rem', padding:'14px 26px', borderRadius:'12px', textDecoration:'none', transition:'all 0.2s' }}
+                                    onMouseEnter={e=>e.currentTarget.style.background='var(--gray-200)'}
+                                    onMouseLeave={e=>e.currentTarget.style.background='var(--gray-100)'}>
                                     Our Mission <i className="fa-solid fa-arrow-right" />
                                 </Link>
                             </div>
@@ -98,25 +99,25 @@ export default function Home() {
 
                         {/* RIGHT — live AI result card */}
                         <div style={{ display:'flex', justifyContent:'center' }}>
-                            <div style={{ width:'100%', maxWidth:'360px', background:'rgba(255,255,255,0.05)', border:'1px solid rgba(255,255,255,0.12)', borderRadius:'24px', padding:'20px', backdropFilter:'blur(20px)', boxShadow:'0 40px 80px rgba(0,0,0,0.4)' }}>
+                            <div style={{ width:'100%', maxWidth:'360px', background:'rgba(255,255,255,0.8)', border:'1px solid var(--gray-200)', borderRadius:'24px', padding:'20px', backdropFilter:'blur(20px)', boxShadow:'0 40px 80px rgba(0,0,0,0.08)' }}>
                                 {/* Header */}
                                 <div style={{ display:'flex', alignItems:'center', gap:'10px', marginBottom:'16px' }}>
-                                    <span style={{ fontSize:'0.75rem', color:'#6ee7b7', fontWeight:'700', letterSpacing:'0.05em' }}>MIBA. AI · LIVE SCAN</span>
+                                    <span style={{ fontSize:'0.75rem', color:'var(--primary-dark)', fontWeight:'700', letterSpacing:'0.05em' }}>MIBA. AI · LIVE SCAN</span>
                                 </div>
 
                                 {/* Image placeholder */}
-                                <div style={{ borderRadius:'14px', height:'160px', background:'linear-gradient(135deg,rgba(6,78,59,0.8),rgba(2,13,7,0.9))', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', marginBottom:'16px', border:'1px dashed rgba(52,211,153,0.2)', gap:'8px' }}>
-                                    <i className="fa-solid fa-camera-retro" style={{ fontSize:'2rem', color:'rgba(52,211,153,0.5)' }} />
-                                    <span style={{ fontSize:'0.75rem', color:'rgba(255,255,255,0.3)' }}>Point camera at waste</span>
+                                <div style={{ borderRadius:'14px', height:'160px', background:'var(--gray-100)', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', marginBottom:'16px', border:'1px dashed var(--gray-300)', gap:'8px' }}>
+                                    <i className="fa-solid fa-camera-retro" style={{ fontSize:'2rem', color:'var(--gray-400)' }} />
+                                    <span style={{ fontSize:'0.75rem', color:'var(--gray-500)' }}>Point camera at waste</span>
                                 </div>
 
                                 {/* Detection result */}
-                                <div style={{ background:'rgba(16,185,129,0.1)', border:'1px solid rgba(16,185,129,0.2)', borderRadius:'12px', padding:'12px 14px', marginBottom:'14px' }}>
+                                <div style={{ background:'var(--primary-light)', border:'1px solid rgba(16,185,129,0.2)', borderRadius:'12px', padding:'12px 14px', marginBottom:'14px' }}>
                                     <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'6px' }}>
-                                        <span style={{ fontWeight:'700', color:'#fff', fontSize:'0.9rem' }}>W02 · Rigid Plastic (PET)</span>
-                                        <span style={{ background:'#34d399', color:'#022c22', fontSize:'0.65rem', fontWeight:'800', padding:'2px 8px', borderRadius:'99px' }}>94%</span>
+                                        <span style={{ fontWeight:'700', color:'var(--dark)', fontSize:'0.9rem' }}>W02 · Rigid Plastic (PET)</span>
+                                        <span style={{ background:'var(--primary)', color:'#fff', fontSize:'0.65rem', fontWeight:'800', padding:'2px 8px', borderRadius:'99px' }}>94%</span>
                                     </div>
-                                    <div style={{ fontSize:'0.75rem', color:'rgba(255,255,255,0.5)' }}>Recyclable · SCRAP route · High severity</div>
+                                    <div style={{ fontSize:'0.75rem', color:'var(--gray-600)' }}>Recyclable · SCRAP route · High severity</div>
                                 </div>
 
                                 {/* Metrics grid */}
@@ -126,20 +127,20 @@ export default function Home() {
                                         { icon:'🌿', v:'4.3 kg',   l:'CO₂e Saved' },
                                         { icon:'💰', v:'₹29.90',  l:'Est. Value' },
                                     ].map(m=>(
-                                        <div key={m.l} style={{ background:'rgba(255,255,255,0.05)', borderRadius:'10px', padding:'10px 6px', textAlign:'center' }}>
+                                        <div key={m.l} style={{ background:'var(--white)', border:'1px solid var(--gray-100)', borderRadius:'10px', padding:'10px 6px', textAlign:'center', boxShadow:'var(--shadow-sm)' }}>
                                             <div style={{ fontSize:'1.1rem', marginBottom:'4px' }}>{m.icon}</div>
-                                            <div style={{ color:'#fff', fontWeight:'800', fontSize:'0.82rem' }}>{m.v}</div>
-                                            <div style={{ color:'rgba(255,255,255,0.4)', fontSize:'0.62rem', marginTop:'2px' }}>{m.l}</div>
+                                            <div style={{ color:'var(--dark)', fontWeight:'800', fontSize:'0.82rem' }}>{m.v}</div>
+                                            <div style={{ color:'var(--gray-500)', fontSize:'0.62rem', marginTop:'2px' }}>{m.l}</div>
                                         </div>
                                     ))}
                                 </div>
 
                                 {/* Work order */}
-                                <div style={{ background:'rgba(245,158,11,0.08)', border:'1px solid rgba(245,158,11,0.2)', borderRadius:'10px', padding:'10px 12px', display:'flex', alignItems:'center', gap:'10px' }}>
-                                    <i className="fa-solid fa-truck-pickup" style={{ color:'#fbbf24', fontSize:'0.9rem' }} />
+                                <div style={{ background:'var(--secondary-light)', border:'1px solid rgba(245,158,11,0.2)', borderRadius:'10px', padding:'10px 12px', display:'flex', alignItems:'center', gap:'10px' }}>
+                                    <i className="fa-solid fa-truck-pickup" style={{ color:'var(--secondary-dark)', fontSize:'0.9rem' }} />
                                     <div>
-                                        <div style={{ color:'#fbbf24', fontWeight:'700', fontSize:'0.78rem' }}>Work Order Created</div>
-                                        <div style={{ color:'rgba(255,255,255,0.4)', fontSize:'0.68rem' }}>Collector assigned · ETA 2 hrs</div>
+                                        <div style={{ color:'var(--secondary-dark)', fontWeight:'700', fontSize:'0.78rem' }}>Work Order Created</div>
+                                        <div style={{ color:'var(--gray-600)', fontSize:'0.68rem' }}>Collector assigned · ETA 2 hrs</div>
                                     </div>
                                 </div>
                             </div>
@@ -248,33 +249,33 @@ export default function Home() {
             {/* ══════════════════════════════════════════════════
                 TRACTION — live numbers
             ══════════════════════════════════════════════════ */}
-            <section ref={statsRef} style={{ padding:'6rem 0', background:'linear-gradient(135deg,#022c22 0%,#064e3b 60%,#065f46 100%)', position:'relative', overflow:'hidden' }}>
-                <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:'800px', height:'800px', borderRadius:'50%', background:'radial-gradient(circle,rgba(16,185,129,0.07) 0%,transparent 60%)', pointerEvents:'none' }} />
+            <section ref={statsRef} style={{ padding:'6rem 0', background:'var(--gray-100)', borderTop:'1px solid var(--gray-200)', borderBottom:'1px solid var(--gray-200)', position:'relative', overflow:'hidden' }}>
+                <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:'800px', height:'800px', borderRadius:'50%', background:'radial-gradient(circle,rgba(16,185,129,0.03) 0%,transparent 60%)', pointerEvents:'none' }} />
                 <div className="container" style={{ position:'relative' }}>
                     <div style={{ textAlign:'center', marginBottom:'4rem' }}>
-                        <span style={{ background:'rgba(16,185,129,0.18)', border:'1px solid rgba(16,185,129,0.3)', color:'#6ee7b7', fontWeight:'700', fontSize:'0.72rem', padding:'4px 14px', borderRadius:'99px', letterSpacing:'0.08em', textTransform:'uppercase' }}>
+                        <span style={{ background:'var(--primary-light)', border:'1px solid rgba(16,185,129,0.1)', color:'var(--primary-dark)', fontWeight:'700', fontSize:'0.72rem', padding:'4px 14px', borderRadius:'99px', letterSpacing:'0.08em', textTransform:'uppercase' }}>
                             <i className="fa-solid fa-signal" style={{ marginRight:'6px' }} />Live Traction
                         </span>
-                        <h2 style={{ color:'#fff', marginTop:'1rem', marginBottom:'0.5rem', fontSize:'clamp(1.8rem,4vw,2.4rem)' }}>Real numbers. Real impact.</h2>
-                        <p style={{ color:'rgba(255,255,255,0.55)', fontSize:'1rem' }}>Updated live from our production database.</p>
+                        <h2 style={{ color:'var(--dark)', marginTop:'1rem', marginBottom:'0.5rem', fontSize:'clamp(1.8rem,4vw,2.4rem)' }}>Real numbers. Real impact.</h2>
+                        <p style={{ color:'var(--gray-500)', fontSize:'1rem' }}>Updated live from our production database.</p>
                     </div>
 
                     <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(180px,1fr))', gap:'1.5rem', maxWidth:'900px', margin:'0 auto' }}>
                         {[
-                            { v:users,   suf:'+', label:'Citizens Registered',  sub:'Across all roles',         color:'#34d399', icon:'fa-users' },
-                            { v:reports, suf:'+', label:'Waste Reports Filed',   sub:'AI-verified events',       color:'#fbbf24', icon:'fa-flag' },
-                            { v:cities,  suf:'',  label:'Cities Active',         sub:'And growing fast',         color:'#60a5fa', icon:'fa-city' },
-                            { v:co2,     suf:' T',label:'CO₂e Avoided (est.)',   sub:'Tonnes this quarter',      color:'#a78bfa', icon:'fa-leaf' },
+                            { v:users,   suf:'+', label:'Citizens Registered',  sub:'Across all roles',         color:'var(--primary)', icon:'fa-users' },
+                            { v:reports, suf:'+', label:'Waste Reports Filed',   sub:'AI-verified events',       color:'var(--secondary)', icon:'fa-flag' },
+                            { v:cities,  suf:'',  label:'Cities Active',         sub:'And growing fast',         color:'var(--info)', icon:'fa-city' },
+                            { v:co2,     suf:' T',label:'CO₂e Avoided (est.)',   sub:'Tonnes this quarter',      color:'var(--accent)', icon:'fa-leaf' },
                         ].map(s=>(
                             <div key={s.label} style={{ textAlign:'center', padding:'2rem 1rem' }}>
-                                <div style={{ width:'52px', height:'52px', borderRadius:'16px', background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.1)', display:'flex', alignItems:'center', justifyContent:'center', margin:'0 auto 1rem' }}>
+                                <div style={{ width:'52px', height:'52px', borderRadius:'16px', background:'var(--white)', border:'1px solid var(--gray-200)', display:'flex', alignItems:'center', justifyContent:'center', margin:'0 auto 1rem', boxShadow:'var(--shadow-sm)' }}>
                                     <i className={`fa-solid ${s.icon}`} style={{ color:s.color, fontSize:'1.2rem' }} />
                                 </div>
                                 <div style={{ fontSize:'clamp(2rem,5vw,3rem)', fontWeight:'900', color:s.color, fontFamily:"'Outfit',sans-serif", lineHeight:1 }}>
                                     {s.v.toLocaleString()}{s.suf}
                                 </div>
-                                <div style={{ color:'#fff', fontWeight:'700', fontSize:'0.9rem', marginTop:'8px' }}>{s.label}</div>
-                                <div style={{ color:'rgba(255,255,255,0.4)', fontSize:'0.75rem', marginTop:'3px' }}>{s.sub}</div>
+                                <div style={{ color:'var(--dark)', fontWeight:'700', fontSize:'0.9rem', marginTop:'8px' }}>{s.label}</div>
+                                <div style={{ color:'var(--gray-500)', fontSize:'0.75rem', marginTop:'3px' }}>{s.sub}</div>
                             </div>
                         ))}
                     </div>
@@ -322,25 +323,27 @@ export default function Home() {
             {/* ══════════════════════════════════════════════════
                 CTA
             ══════════════════════════════════════════════════ */}
-            <section style={{ background:'#fff', padding:'6rem 0', borderTop:'1px solid #f1f5f9' }}>
+            <section style={{ background:'var(--white)', padding:'6rem 0', borderTop:'1px solid var(--gray-200)' }}>
                 <div className="container" style={{ maxWidth:'760px', textAlign:'center' }}>
-                    <div style={{ background:'linear-gradient(135deg,#022c22,#064e3b)', borderRadius:'28px', padding:'4rem 3rem', position:'relative', overflow:'hidden' }}>
-                        <div style={{ position:'absolute', top:'-80px', right:'-80px', width:'300px', height:'300px', borderRadius:'50%', background:'radial-gradient(circle,rgba(16,185,129,0.15) 0%,transparent 70%)', pointerEvents:'none' }} />
+                    <div style={{ background:'var(--white)', border:'1px solid var(--gray-200)', borderRadius:'28px', padding:'4rem 3rem', position:'relative', overflow:'hidden', boxShadow:'var(--shadow-lg)' }}>
+                        <div style={{ position:'absolute', top:'-80px', right:'-80px', width:'300px', height:'300px', borderRadius:'50%', background:'radial-gradient(circle,rgba(16,185,129,0.06) 0%,transparent 70%)', pointerEvents:'none' }} />
                         <div style={{ position:'relative' }}>
-                            <span style={{ background:'rgba(16,185,129,0.18)', border:'1px solid rgba(16,185,129,0.3)', color:'#6ee7b7', fontWeight:'700', fontSize:'0.72rem', padding:'4px 14px', borderRadius:'99px', letterSpacing:'0.08em', textTransform:'uppercase' }}>
+                            <span style={{ background:'var(--primary-light)', border:'1px solid rgba(16,185,129,0.1)', color:'var(--primary-dark)', fontWeight:'700', fontSize:'0.72rem', padding:'4px 14px', borderRadius:'99px', letterSpacing:'0.08em', textTransform:'uppercase' }}>
                                 <i className="fa-solid fa-sparkles" style={{ marginRight:'6px' }} />Free to Start
                             </span>
-                            <h2 style={{ color:'#fff', marginTop:'1.25rem', marginBottom:'1rem', fontSize:'clamp(1.8rem,4vw,2.6rem)', lineHeight:1.15 }}>
+                            <h2 style={{ color:'var(--dark)', marginTop:'1.25rem', marginBottom:'1rem', fontSize:'clamp(1.8rem,4vw,2.6rem)', lineHeight:1.15 }}>
                                 Join the mission.<br />Report India's first waste.
                             </h2>
-                            <p style={{ color:'rgba(255,255,255,0.6)', marginBottom:'2.5rem', fontSize:'1rem', lineHeight:1.7 }}>
+                            <p style={{ color:'var(--gray-600)', marginBottom:'2.5rem', fontSize:'1rem', lineHeight:1.7 }}>
                                 Every photo you take feeds the AI, builds the data layer, and pushes a work order to a collector. This is civic tech that actually works.
                             </p>
                             <div style={{ display:'flex', gap:'12px', justifyContent:'center', flexWrap:'wrap' }}>
-                                <Link to="/register" style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'linear-gradient(135deg,#10b981,#059669)', color:'#fff', fontWeight:'700', fontSize:'0.95rem', padding:'14px 28px', borderRadius:'12px', boxShadow:'0 8px 24px rgba(16,185,129,0.4)', textDecoration:'none' }}>
+                                <Link to="/register" style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'linear-gradient(135deg,#10b981,#059669)', color:'#fff', fontWeight:'700', fontSize:'0.95rem', padding:'14px 28px', borderRadius:'12px', boxShadow:'0 8px 24px rgba(16,185,129,0.25)', textDecoration:'none' }}>
                                     <i className="fa-solid fa-user-plus" /> Create Free Account
                                 </Link>
-                                <Link to="/ai-insights" style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'rgba(255,255,255,0.09)', border:'1px solid rgba(255,255,255,0.2)', color:'#fff', fontWeight:'600', fontSize:'0.95rem', padding:'14px 28px', borderRadius:'12px', textDecoration:'none' }}>
+                                <Link to="/ai-insights" style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'var(--gray-100)', border:'1px solid var(--gray-200)', color:'var(--dark)', fontWeight:'600', fontSize:'0.95rem', padding:'14px 28px', borderRadius:'12px', textDecoration:'none', transition:'all 0.2s' }}
+                                    onMouseEnter={e=>e.currentTarget.style.background='var(--gray-200)'}
+                                    onMouseLeave={e=>e.currentTarget.style.background='var(--gray-100)'}>
                                     <i className="fa-solid fa-chart-line" /> View AI Insights
                                 </Link>
                             </div>
