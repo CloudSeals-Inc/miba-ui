@@ -4,6 +4,7 @@ import { getUserSession, getReports, API_BASE_URL } from '../utils/storage';
 
 
 export default function Dashboard() {
+    const navigate = useNavigate();
     const [reports, setReports] = useState([]);
     const [filter, setFilter] = useState('all');
     const [isLoading, setIsLoading] = useState(true);
@@ -17,8 +18,13 @@ export default function Dashboard() {
     };
 
     useEffect(() => {
+        const session = getUserSession();
+        if (session?.role === 'collector') {
+            navigate('/collector');
+            return;
+        }
         fetchReports();
-    }, []);
+    }, [navigate]);
 
     const submitRating = async (id, rating) => {
         try {
@@ -99,7 +105,7 @@ export default function Dashboard() {
                             <div key={report.id} className="card" style={{ padding: 0, overflow: 'hidden' }}>
                                 <div style={{ display: 'flex' }}>
                                     <div style={{ position: 'relative', width: '120px' }}>
-                                        <img src={report.imageUrl} alt="Before" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        <img src={report.imageUrl} alt="Before" onError={e => e.target.src = 'https://placehold.co/600x400/e2e8f0/64748b?text=No+Image'} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                         <span style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(0,0,0,0.5)', color: 'white', fontSize: '0.6rem', textAlign: 'center', padding: '2px' }}>BEFORE</span>
                                     </div>
                                     {report.status.toLowerCase() === 'cleaned' && report.afterImageUrl && (
@@ -118,25 +124,25 @@ export default function Dashboard() {
                                             </div>
                                             <span style={{ fontSize: '0.7rem', color: 'var(--gray-400)' }}>{report.workOrderId}</span>
                                         </div>
-                                        
+
                                         <p style={{ fontSize: '0.8rem', color: 'var(--gray-600)', marginBottom: '10px' }}>{report.description || 'No description provided.'}</p>
 
                                         {report.status.toLowerCase() === 'cleaned' && !report.rating && (
                                             <div style={{ borderTop: '1px solid var(--gray-100)', paddingTop: '10px', marginTop: '10px' }}>
-                                               {ratingId === report.id ? (
-                                                   <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                                                       <span style={{ fontSize: '0.75rem', fontWeight: '700' }}>Rate Service:</span>
-                                                       {[1,2,3,4,5].map(star => (
-                                                           <button key={star} onClick={() => submitRating(report.id, star)} style={{ background: 'none', border: 'none', color: '#fbbf24', fontSize: '1.2rem', cursor: 'pointer' }}>
-                                                               <i className="fa-regular fa-star"></i>
-                                                           </button>
-                                                       ))}
-                                                   </div>
-                                               ) : (
-                                                   <button onClick={() => setRatingId(report.id)} className="btn btn-primary" style={{ height: '32px', minHeight: '32px', fontSize: '0.7rem', padding: '0 15px' }}>
-                                                       RATE COLLECTOR
-                                                   </button>
-                                               )}
+                                                {ratingId === report.id ? (
+                                                    <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                                        <span style={{ fontSize: '0.75rem', fontWeight: '700' }}>Rate Service:</span>
+                                                        {[1, 2, 3, 4, 5].map(star => (
+                                                            <button key={star} onClick={() => submitRating(report.id, star)} style={{ background: 'none', border: 'none', color: '#fbbf24', fontSize: '1.2rem', cursor: 'pointer' }}>
+                                                                <i className="fa-regular fa-star"></i>
+                                                            </button>
+                                                        ))}
+                                                    </div>
+                                                ) : (
+                                                    <button onClick={() => setRatingId(report.id)} className="btn btn-primary" style={{ height: '32px', minHeight: '32px', fontSize: '0.7rem', padding: '0 15px' }}>
+                                                        RATE COLLECTOR
+                                                    </button>
+                                                )}
                                             </div>
                                         )}
                                         {report.rating && (
@@ -152,7 +158,7 @@ export default function Dashboard() {
                     </div>
                 )}
             </div>
-            
+
             <style>{`
                  .stat-pill {
                     padding: 0.2rem 0.6rem;

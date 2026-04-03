@@ -26,10 +26,12 @@ export async function getReports() {
         location: wo.location?.lat != null
             ? `Lat: ${wo.location.lat.toFixed(4)}, Lng: ${wo.location.lng.toFixed(4)}`
             : (wo.location || 'Unknown'),
-        description: wo.classification?.ai_narrative?.split('\n')[0] || wo.description || '',
-        imageUrl: wo.imageUrl || '',
+        description: (wo.classification?.ai_narrative || wo.description || '').replace(/^#+\s*/gm, '').split('\n')[0] || 'No description',
+        imageUrl: wo.imageUrl && wo.imageUrl.startsWith('data:image') 
+            ? wo.imageUrl 
+            : (wo.imageUrl ? `data:image/jpeg;base64,${wo.imageUrl}` : 'https://placehold.co/600x400/e2e8f0/64748b?text=No+Image'),
         afterImageUrl: wo.afterImageUrl || null,
-        aiCategory: wo.classification?.dominant_category_name || wo.aiCategory || '',
+        aiCategory: wo.classification?.dominant_category_name || wo.aiCategory || 'General Waste',
         date: wo.created_at || wo.date,
         reporterPhone: wo.reporter_id || wo.reporterPhone,
         rating: wo.rating || null,
@@ -47,7 +49,7 @@ export async function saveReport(report) {
 }
 
 export function calculateUserStats(phone, reports) {
-    const userReports = reports.filter(r => r.phone === phone);
+    const userReports = (reports || []).filter(r => r.reporterPhone === phone);
     return {
         reportsCompiled: userReports.length,
         credits: userReports.length * 50 // Simple 50 credits per report

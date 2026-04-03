@@ -12,12 +12,17 @@ export default function CollectorDashboard() {
     const [afterImage, setAfterImage] = useState('');
     const [isScanning, setIsScanning] = useState(false);
     const [isVerifying, setIsVerifying] = useState(false);
+    const [completedTask, setCompletedTask] = useState(null);
 
     useEffect(() => {
         const session = getUserSession();
         if (!session) {
             navigate('/register');
         } else {
+            if (session.role === 'citizen') {
+                navigate('/dashboard');
+                return;
+            }
             setUser(session);
             loadTasks();
             // Auto refresh every 30 seconds
@@ -30,8 +35,8 @@ export default function CollectorDashboard() {
         setIsLoading(true);
         const data = await getReports();
         // Case-insensitive status check
-        setAssignedReports(data.filter(r => 
-            r.status.toLowerCase() === 'pending' || 
+        setAssignedReports(data.filter(r =>
+            r.status.toLowerCase() === 'pending' ||
             r.status.toLowerCase() === 'assigned'
         ));
         setIsLoading(false);
@@ -57,27 +62,27 @@ export default function CollectorDashboard() {
 
     const calculateDistance = (lat1, lon1, lat2, lon2) => {
         const R = 6371e3; // Earth radius in meters
-        const φ1 = lat1 * Math.PI/180;
-        const φ2 = lat2 * Math.PI/180;
-        const Δφ = (lat2-lat1) * Math.PI/180;
-        const Δλ = (lon2-lon1) * Math.PI/180;
+        const φ1 = lat1 * Math.PI / 180;
+        const φ2 = lat2 * Math.PI / 180;
+        const Δφ = (lat2 - lat1) * Math.PI / 180;
+        const Δλ = (lon2 - lon1) * Math.PI / 180;
 
-        const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-                  Math.cos(φ1) * Math.cos(φ2) *
-                  Math.sin(Δλ/2) * Math.sin(Δλ/2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+            Math.cos(φ1) * Math.cos(φ2) *
+            Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return R * c; // in meters
     };
 
     const completeWorkOrder = async () => {
         if (!afterImage) return alert("Please capture the After Photo first!");
-        
+
         setIsLoading(true);
         // Step 1: Verify Location
         if (!navigator.geolocation) {
-             alert("Geolocation is not supported by this browser.");
-             setIsLoading(false);
-             return;
+            alert("Geolocation is not supported by this browser.");
+            setIsLoading(false);
+            return;
         }
 
         navigator.geolocation.getCurrentPosition(async (pos) => {
@@ -115,7 +120,7 @@ export default function CollectorDashboard() {
                 body: JSON.stringify({ afterImageUrl: afterImage })
             });
             if (res.ok) {
-                alert("Pickup Verified! ₹150 added to your wallet.");
+                setCompletedTask(activeTask);
                 setActiveTask(null);
                 setAfterImage('');
                 setIsVerifying(false);
@@ -159,7 +164,7 @@ export default function CollectorDashboard() {
                             <i className="fa-solid fa-clipboard-check" style={{ fontSize: '4rem', color: 'var(--primary)', marginBottom: '1rem' }}></i>
                             <h3 style={{ color: 'white' }}>Verify Work Order</h3>
                         </div>
-                        
+
                         <div style={{ background: '#0d1117', padding: '25px', borderRadius: '15px', border: '1px solid #30363d', marginBottom: '2rem' }}>
                             <p style={{ fontSize: '0.75rem', opacity: 0.5, textTransform: 'uppercase', marginBottom: '10px' }}>CITIZEN WORK ORDER ID</p>
                             <h2 style={{ color: 'var(--primary)', letterSpacing: '2px' }}>{activeTask?.workOrderId}</h2>
@@ -187,13 +192,48 @@ export default function CollectorDashboard() {
                                 )}
                             </div>
                         </div>
-                        
+
                         <h3 style={{ color: 'white', marginBottom: '0.5rem' }}>Verify Cleanup</h3>
                         <p style={{ fontSize: '0.85rem', color: '#8b949e', marginBottom: '1.5rem' }}>Submit the 'After' photo to complete this work order.</p>
 
                         <button onClick={completeWorkOrder} className="btn btn-primary" disabled={isLoading} style={{ width: '100%', padding: '1.25rem' }}>
-                            {isLoading ? 'VERIFYING LOCATION...' : 'COMPLETE & COLLECT ₹150'}
+                            {isLoading ? 'VERIFYING LOCATION...' : 'COMPLETE & COLLECT YOUR SHARE'}
                         </button>
+                    </div>
+                ) : completedTask ? (
+                    <div className="card animate-slide-up" style={{ background: '#161b22', border: '1px solid #30363d', textAlign: 'center', padding: '40px 24px' }}>
+                        <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: 'rgba(56, 185, 129, 0.1)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem', margin: '0 auto 1.5rem' }}>
+                            <i className="fa-solid fa-circle-check"></i>
+                        </div>
+                        <h2 style={{ color: 'white', marginBottom: '8px' }}>Pickup Verified!</h2>
+                        <p style={{ color: '#8b949e', fontSize: '0.9rem', marginBottom: '2rem' }}>Earnings have been distributed as per the MIBA economics model.</p>
+
+                        <div style={{ background: '#0d1117', borderRadius: '15px', border: '1px solid #30363d', padding: '24px', marginBottom: '2rem', textAlign: 'left' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '16px', borderBottom: '1px solid #30363d', marginBottom: '16px' }}>
+                                <span style={{ color: '#8b949e', fontWeight: '800', fontSize: '0.7rem', textTransform: 'uppercase' }}>Total Work Value</span>
+                                <span style={{ color: 'white', fontWeight: '900', fontSize: '1.25rem' }}>₹{completedTask.grand_total_value_inr?.toFixed(2) || '150.00'}</span>
+                            </div>
+
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                        <span style={{ color: 'var(--primary)', fontWeight: '800', fontSize: '0.85rem' }}>Your share (60%)</span>
+                                        <span style={{ color: '#3fb950', fontSize: '0.65rem' }}>Credited to UPI</span>
+                                    </div>
+                                    <span style={{ color: 'var(--primary)', fontWeight: '900' }}>₹{((completedTask.grand_total_value_inr || 150) * 0.60).toFixed(2)}</span>
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                    <span style={{ color: '#8b949e', fontSize: '0.85rem' }}>Platform fee (25%)</span>
+                                    <span style={{ color: '#8b949e', fontWeight: '700' }}>₹{((completedTask.grand_total_value_inr || 150) * 0.25).toFixed(2)}</span>
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                    <span style={{ color: '#8b949e', fontSize: '0.85rem' }}>Municipal share (15%)</span>
+                                    <span style={{ color: '#8b949e', fontWeight: '700' }}>₹{((completedTask.grand_total_value_inr || 150) * 0.15).toFixed(2)}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onClick={() => setCompletedTask(null)} className="btn btn-primary" style={{ width: '100%', padding: '1.25rem' }}>BACK TO DASHBOARD</button>
                     </div>
                 ) : (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -216,7 +256,7 @@ export default function CollectorDashboard() {
                                         </div>
                                         <p style={{ fontSize: '0.85rem', fontWeight: '700', marginBottom: '5px' }}><i className="fa-solid fa-location-dot" style={{ color: 'red', fontSize: '0.7rem' }}></i> {task.location}</p>
                                         <p style={{ fontSize: '0.75rem', opacity: 0.6, marginBottom: '15px' }}>{task.city}</p>
-                                        
+
                                         <div style={{ display: 'flex', gap: '8px' }}>
                                             <button onClick={() => openInMaps(task.location)} className="btn btn-outline" style={{ flex: 1, borderColor: '#30363d', color: 'white', fontSize: '0.65rem', height: '32px', minHeight: '32px' }}>
                                                 MAPS
@@ -232,7 +272,7 @@ export default function CollectorDashboard() {
                     </div>
                 )}
             </div>
-            
+
             <style>{`
                 @keyframes scanMove {
                     0% { top: 20%; }
