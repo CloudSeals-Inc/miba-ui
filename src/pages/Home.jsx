@@ -22,14 +22,14 @@ function useCountUp(target, duration = 1800) {
 }
 
 export default function Home() {
-    const [stats, setStats] = useState({ user_count: 0, report_count: 0 });
+    const [stats, setStats] = useState({ user_count: 0, report_count: 0, co2e_avoided_kg: 0 });
     const [visible, setVisible] = useState(false);
     const statsRef = useRef(null);
 
     useEffect(() => {
         fetch(`${API_BASE_URL}/stats`)
             .then(r => r.json())
-            .then(d => setStats({ user_count: d.user_count || 0, report_count: d.report_count || 0 }))
+            .then(d => setStats({ user_count: d.user_count || 0, report_count: d.report_count || 0, co2e_avoided_kg: d.co2e_avoided_kg || 0 }))
             .catch(() => {});
     }, []);
 
@@ -41,8 +41,7 @@ export default function Home() {
 
     const users   = useCountUp(visible ? stats.user_count : 0);
     const reports = useCountUp(visible ? stats.report_count : 0);
-    const cities  = useCountUp(visible ? 24 : 0, 1200);
-    const co2     = useCountUp(visible ? 18 : 0, 1400);
+    const co2kg   = useCountUp(visible ? Math.round(stats.co2e_avoided_kg) : 0, 1400);
 
     return (
         <div style={{ background: '#fff' }}>
@@ -264,8 +263,7 @@ export default function Home() {
                         {[
                             { v:users,   suf:'+', label:'Citizens Registered',  sub:'Across all roles',         color:'var(--primary)', icon:'fa-users' },
                             { v:reports, suf:'+', label:'Waste Reports Filed',   sub:'AI-verified events',       color:'var(--secondary)', icon:'fa-flag' },
-                            { v:cities,  suf:'',  label:'Cities Active',         sub:'And growing fast',         color:'var(--info)', icon:'fa-city' },
-                            { v:co2,     suf:' T',label:'CO₂e Avoided (est.)',   sub:'Tonnes this quarter',      color:'var(--accent)', icon:'fa-leaf' },
+                            { v:co2kg,   suf:' kg',label:'CO₂e Avoided',          sub:'From verified pickups',    color:'var(--accent)', icon:'fa-leaf' },
                         ].map(s=>(
                             <div key={s.label} style={{ textAlign:'center', padding:'2rem 1rem' }}>
                                 <div style={{ width:'52px', height:'52px', borderRadius:'16px', background:'var(--white)', border:'1px solid var(--gray-200)', display:'flex', alignItems:'center', justifyContent:'center', margin:'0 auto 1rem', boxShadow:'var(--shadow-sm)' }}>

@@ -178,7 +178,7 @@ export default function CollectorDashboard() {
                         <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
                             <div style={{ flex: 1 }}>
                                 <p style={{ fontSize: '0.65rem', fontWeight: '800', opacity: 0.5, marginBottom: '5px' }}>BEFORE</p>
-                                <img src={activeTask.imageUrl} style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '10px' }} alt="Before" />
+                                <img src={activeTask.imageUrl} onError={e => e.target.src = 'https://placehold.co/600x400/e2e8f0/64748b?text=No+Image'} style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '10px' }} alt="Before" />
                             </div>
                             <div style={{ flex: 1 }}>
                                 <p style={{ fontSize: '0.65rem', fontWeight: '800', color: 'var(--primary)', marginBottom: '5px' }}>AFTER (UPLOAD)</p>
@@ -248,7 +248,7 @@ export default function CollectorDashboard() {
                         ) : assignedReports.map(task => (
                             <div key={task.id} className="card" style={{ background: '#161b22', border: '1px solid #30363d', color: 'white', padding: 0, overflow: 'hidden' }}>
                                 <div style={{ display: 'flex' }}>
-                                    <img src={task.imageUrl} style={{ width: '140px', height: '160px', objectFit: 'cover' }} alt="Waste" />
+                                    <img src={task.imageUrl} onError={e => e.target.src = 'https://placehold.co/600x400/e2e8f0/64748b?text=No+Image'} style={{ width: '140px', height: '160px', objectFit: 'cover' }} alt="Waste" />
                                     <div style={{ flex: 1, padding: '15px' }}>
                                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
                                             <span style={{ color: 'var(--primary)', fontWeight: '800', fontSize: '0.75rem' }}>{task.workOrderId || 'WO-PENDING'}</span>
