@@ -27,9 +27,12 @@ export async function getReports() {
             ? `Lat: ${wo.location.lat.toFixed(4)}, Lng: ${wo.location.lng.toFixed(4)}`
             : (wo.location || 'Unknown'),
         description: (wo.classification?.ai_narrative || wo.description || '').replace(/^#+\s*/gm, '').split('\n')[0] || 'No description',
-        imageUrl: wo.imageUrl && wo.imageUrl.startsWith('data:image') 
-            ? wo.imageUrl 
-            : (wo.imageUrl ? `data:image/jpeg;base64,${wo.imageUrl}` : 'https://placehold.co/600x400/e2e8f0/64748b?text=No+Image'),
+        imageUrl: (() => {
+            const raw = wo.image_data || wo.imageUrl || '';
+            if (!raw) return '';
+            if (raw.startsWith('data:image')) return raw;
+            return `data:image/jpeg;base64,${raw}`;
+        })(),
         afterImageUrl: wo.afterImageUrl || null,
         aiCategory: wo.classification?.dominant_category_name || wo.aiCategory || 'General Waste',
         date: wo.created_at || wo.date,
