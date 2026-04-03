@@ -11,6 +11,7 @@ import Report from './pages/Report';
 import Dashboard from './pages/Dashboard';
 import CollectorDashboard from './pages/CollectorDashboard';
 import AIInsights from './pages/AIInsights';
+import ProtectedRoute from './components/ProtectedRoute';
 import { useEffect } from 'react';
 import './App.css';
 
@@ -32,10 +33,10 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/report" element={<Report />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/collector" element={<CollectorDashboard />} />
-          <Route path="/ai-insights" element={<AIInsights />} />
+          <Route path="/report" element={<ProtectedRoute><Report /></ProtectedRoute>} />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/collector" element={<ProtectedRoute><CollectorDashboard /></ProtectedRoute>} />
+          <Route path="/ai-insights" element={<ProtectedRoute><AIInsights /></ProtectedRoute>} />
         </Routes>
       </main>
       <Footer />
