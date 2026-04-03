@@ -67,7 +67,7 @@ export default function Home() {
                         <div>
                             <div style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'rgba(16,185,129,0.12)', border:'1px solid rgba(16,185,129,0.3)', borderRadius:'99px', padding:'5px 14px', fontSize:'0.72rem', fontWeight:'700', color:'#6ee7b7', letterSpacing:'0.08em', textTransform:'uppercase', marginBottom:'1.75rem' }}>
                                 <span style={{ width:'6px', height:'6px', borderRadius:'50%', background:'#34d399', boxShadow:'0 0 8px #34d399', display:'inline-block', animation:'pulse 2s infinite' }} />
-                                Live Platform · 16 Waste Categories · Real ₹ Value
+                                Smart Sustainability Platform
                             </div>
 
                             <h1 style={{ fontSize:'clamp(2.6rem,5vw,4.2rem)', fontWeight:'900', lineHeight:1.05, color:'#fff', fontFamily:"'Outfit',sans-serif", marginBottom:'1.5rem', letterSpacing:'-0.02em' }}>
@@ -94,13 +94,6 @@ export default function Home() {
                                 </Link>
                             </div>
 
-                            {/* Tech stack badges */}
-                            <div style={{ display:'flex', alignItems:'center', gap:'10px', flexWrap:'wrap' }}>
-                                <span style={{ fontSize:'0.7rem', color:'rgba(255,255,255,0.4)', fontWeight:'600', textTransform:'uppercase', letterSpacing:'0.07em' }}>Powered by</span>
-                                {['YOLOv9','EfficientNet-B3','Gemini 1.5','Vertex AI','Cloud Run'].map(t=>(
-                                    <span key={t} style={{ background:'rgba(255,255,255,0.07)', border:'1px solid rgba(255,255,255,0.12)', borderRadius:'6px', padding:'3px 9px', fontSize:'0.72rem', fontWeight:'600', color:'rgba(255,255,255,0.55)', letterSpacing:'0.02em' }}>{t}</span>
-                                ))}
-                            </div>
                         </div>
 
                         {/* RIGHT — live AI result card */}
@@ -208,8 +201,8 @@ export default function Home() {
                                 icon:'fa-eye', color:'#10b981', bg:'linear-gradient(135deg,#d1fae5,#a7f3d0)',
                                 num:'01',
                                 title:'AI Vision Engine',
-                                sub:'YOLOv9 + EfficientNet-B3 + Gemini 1.5',
-                                points:['16 waste categories (IndicWaste taxonomy)','Weight, volume & CO₂e estimated per object','Scrap ₹ value + token credit calculated instantly','Gemini AI generates human-readable narrative'],
+                                sub:'Proprietary Image Intelligence',
+                                points:['Automated waste category detection','Weight, volume & CO₂e estimated per object','Scrap ₹ value + token credit calculated instantly','AI generates human-readable report narrative'],
                             },
                             {
                                 icon:'fa-coins', color:'#f59e0b', bg:'linear-gradient(135deg,#fef3c7,#fde68a)',
@@ -303,7 +296,7 @@ export default function Home() {
                     <div style={{ maxWidth:'720px', margin:'0 auto' }}>
                         {[
                             { n:'1', icon:'fa-camera',   color:'#10b981', title:'Photograph the Waste',    desc:'Open MIBA, point your camera at any waste pile, and tap Report. Works on any smartphone.' },
-                            { n:'2', icon:'fa-robot',    color:'#f59e0b', title:'AI Analyses in < 3s',     desc:'YOLOv9 detects the waste, EfficientNet classifies it, Gemini writes a report — all automatically.' },
+                            { n:'2', icon:'fa-robot',    color:'#f59e0b', title:'AI Analyses in < 3s',     desc:'Advanced vision models detect the waste, classify it, and write a report — all automatically.' },
                             { n:'3', icon:'fa-rupee-sign',color:'#8b5cf6', title:'See ₹ Value Instantly',   desc:'Scrap market rate, carbon credit, and MIBA token value shown right after scan.' },
                             { n:'4', icon:'fa-truck',    color:'#3b82f6', title:'Collector Dispatched',     desc:'Supervisor AI assigns the nearest collector. You can track pickup status live.' },
                         ].map((s,i)=>(

@@ -70,15 +70,6 @@ export default function Footer() {
                         ))}
                     </div>
 
-                    {/* Tech stack */}
-                    <div>
-                        <p style={{ fontSize: '0.72rem', fontWeight: '700', color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem' }}>Technology</p>
-                        {['YOLOv9 Detection', 'EfficientNet-B3', 'Gemini 1.5 Flash', 'Vertex AI', 'Google Cloud Run', 'MongoDB Atlas', 'IndicWaste Taxonomy'].map(t => (
-                            <p key={t} style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.38)', marginBottom: '8px', lineHeight: 1.4 }}>
-                                <i className="fa-solid fa-microchip" style={{ color: '#34d399', marginRight: '7px', fontSize: '0.7rem' }} />{t}
-                            </p>
-                        ))}
-                    </div>
                 </div>
 
                 {/* Bottom bar */}

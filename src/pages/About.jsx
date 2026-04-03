@@ -37,38 +37,6 @@ export default function About() {
                     </div>
                 </div>
 
-                {/* Section 2: Technology */}
-                <div className="grid grid-cols-1 grid-cols-2" style={{ alignItems: 'center', marginBottom: 'var(--space-16)' }}>
-                    <div>
-                        <span className="pill-warning" style={{ marginBottom: 'var(--space-4)', display: 'inline-block' }}>Innovation</span>
-                        <h2 style={{ marginBottom: 'var(--space-4)' }}>Powered by <span style={{ color: 'var(--secondary)' }}>Vision AI</span></h2>
-                        <p style={{ color: 'var(--gray-600)', marginBottom: 'var(--space-6)' }}>
-                            Powered by <strong>WasteKI</strong> computer vision. YOLOv9 + EfficientNet-B3 identifies 16 waste types from a single photo — plastic, metal, organic, e-waste, and more — with severity score and ₹ value shown instantly.
-                        </p>
-                        <ul style={{ listStyle: 'none', padding: 0 }}>
-                            <li style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
-                                <i className="fa-solid fa-check" style={{ color: 'var(--success)' }}></i> 
-                                <span style={{ fontSize: '0.9375rem' }}>Instant Categorization</span>
-                            </li>
-                            <li style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
-                                <i className="fa-solid fa-check" style={{ color: 'var(--success)' }}></i> 
-                                <span style={{ fontSize: '0.9375rem' }}>Priority Action Flagging</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="card" style={{ background: 'var(--dark)', color: 'var(--white)', padding: 'var(--space-8)' }}>
-                        <div style={{ fontFamily: 'monospace', fontSize: '0.875rem' }}>
-                            <p style={{ color: 'var(--info)' }}>{'>'} Initializing Vision API...</p>
-                            <p style={{ color: 'var(--success)' }}>[OK] Detection Active</p>
-                            <p style={{ marginTop: '20px' }}>Analyzing image data...</p>
-                            <div style={{ border: '1px solid var(--gray-700)', padding: '10px', marginTop: '10px' }}>
-                                <p>Detected: W02 Rigid Plastic</p>
-                                <p>Severity: 8 / 10</p>
-                                <p style={{ color: '#fbbf24' }}>Value: ₹13/kg · Tokens: ₹8</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 {/* Vision Box */}
                 <div className="card" style={{ textAlign: 'center', background: 'var(--primary-dark)', color: 'var(--white)', padding: 'var(--space-12)' }}>
