@@ -75,7 +75,7 @@ export default function Register() {
                     <div style={{ textAlign:'center', marginBottom:'1.75rem' }}>
                         <Link to="/" style={{ textDecoration:'none' }}>
                             <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.9rem', fontWeight:'900', color:'#065f46', letterSpacing:'-0.02em' }}>
-                                MIBA<span style={{ color:'#f59e0b' }}>.</span>
+                                MIBA
                             </div>
                         </Link>
                         <p style={{ color:'#64748b', marginTop:'5px', fontSize:'0.9rem' }}>Join the movement — create your account</p>

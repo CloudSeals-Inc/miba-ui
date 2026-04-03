@@ -72,7 +72,7 @@ export default function Header() {
                         {/* Logo */}
                         <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
                             <span style={{ fontFamily: "'Outfit',sans-serif", fontSize: '1.4rem', fontWeight: '900', color: '#065f46', letterSpacing: '-0.02em' }}>
-                                MIBA<span style={{ color: '#f59e0b' }}>.</span>
+                                MIBA
                             </span>
                         </Link>
 

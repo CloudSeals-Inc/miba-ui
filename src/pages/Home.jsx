@@ -101,7 +101,7 @@ export default function Home() {
                             <div style={{ width:'100%', maxWidth:'360px', background:'rgba(255,255,255,0.8)', border:'1px solid var(--gray-200)', borderRadius:'24px', padding:'20px', backdropFilter:'blur(20px)', boxShadow:'0 40px 80px rgba(0,0,0,0.08)' }}>
                                 {/* Header */}
                                 <div style={{ display:'flex', alignItems:'center', gap:'10px', marginBottom:'16px' }}>
-                                    <span style={{ fontSize:'0.75rem', color:'var(--primary-dark)', fontWeight:'700', letterSpacing:'0.05em' }}>MIBA. AI · LIVE SCAN</span>
+                                    <span style={{ fontSize:'0.75rem', color:'var(--primary-dark)', fontWeight:'700', letterSpacing:'0.05em' }}>MIBA AI · LIVE SCAN</span>
                                 </div>
 
                                 {/* Image placeholder */}

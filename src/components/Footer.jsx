@@ -13,7 +13,7 @@ export default function Footer() {
                     <div style={{ gridColumn: 'span 1' }}>
                         <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.25rem' }}>
                             <span style={{ fontFamily: "'Outfit',sans-serif", fontSize: '1.4rem', fontWeight: '900', color: 'var(--primary-dark)', letterSpacing: '-0.02em' }}>
-                                MIBA<span style={{ color: 'var(--secondary)' }}>.</span>
+                                MIBA
                             </span>
                         </Link>
                         <p style={{ fontSize: '0.875rem', color: 'var(--gray-600)', lineHeight: 1.75, marginBottom: '1.5rem', maxWidth: '240px' }}>

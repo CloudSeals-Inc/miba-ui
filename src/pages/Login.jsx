@@ -59,7 +59,7 @@ export default function Login() {
                     <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                         <Link to="/" style={{ textDecoration: 'none' }}>
                             <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '2rem', fontWeight: '900', color: '#065f46', letterSpacing: '-0.02em' }}>
-                                MIBA<span style={{ color: '#f59e0b' }}>.</span>
+                                MIBA
                             </div>
                         </Link>
                         <p style={{ color: '#64748b', marginTop: '6px', fontSize: '0.95rem' }}>Welcome back — log in to continue</p>
