@@ -194,7 +194,7 @@ export default function Home() {
                         <p style={{ color:'#64748b', maxWidth:'540px', margin:'0 auto', fontSize:'1rem', lineHeight:1.7 }}>MIBA connects citizens, AI, and municipal bodies into a closed-loop waste management system.</p>
                     </div>
 
-                    <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))', gap:'2rem' }}>
+                    <div className="solution-grid" style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))', gap:'2rem' }}>
                         {[
                             {
                                 icon:'fa-eye', color:'#10b981', bg:'linear-gradient(135deg,#d1fae5,#a7f3d0)',
@@ -217,8 +217,15 @@ export default function Home() {
                                 sub:'Supervisor AI · Work order routing',
                                 points:['Auto-creates work orders from every report','Routes to nearest available collector','Tracks pickup SLA and before/after evidence','Dashboard for ULBs — no new software needed'],
                             },
+                            {
+                                icon:'fa-leaf', color:'#06b6d4', bg:'linear-gradient(135deg,#cffafe,#a5f3fc)',
+                                num:'04',
+                                title:'Carbon Impact',
+                                sub:'Verified CO₂e Avoidance',
+                                points:['Every verified pickup logs carbon credits','Offset value shown instantly in ₹','Immutable environmental provenance','Direct contribution to Net Zero target'],
+                            },
                         ].map(p=>(
-                            <div key={p.num} style={{ borderRadius:'22px', overflow:'hidden', border:'1px solid #e2e8f0', boxShadow:'0 4px 16px rgba(0,0,0,0.06)', transition:'transform 0.25s,box-shadow 0.25s' }}
+                            <div key={p.num} className="solution-card" style={{ borderRadius:'22px', overflow:'hidden', border:'1px solid #e2e8f0', boxShadow:'0 4px 16px rgba(0,0,0,0.06)', transition:'transform 0.25s,box-shadow 0.25s' }}
                                 onMouseEnter={e=>{e.currentTarget.style.transform='translateY(-5px)';e.currentTarget.style.boxShadow='0 20px 48px rgba(0,0,0,0.12)'}}
                                 onMouseLeave={e=>{e.currentTarget.style.transform='';e.currentTarget.style.boxShadow='0 4px 16px rgba(0,0,0,0.06)'}}>
                                 <div style={{ background:p.bg, padding:'2rem 2rem 1.5rem' }}>
@@ -255,7 +262,7 @@ export default function Home() {
                         <span style={{ background:'var(--primary-light)', border:'1px solid rgba(16,185,129,0.1)', color:'var(--primary-dark)', fontWeight:'700', fontSize:'0.72rem', padding:'4px 14px', borderRadius:'99px', letterSpacing:'0.08em', textTransform:'uppercase' }}>
                             <i className="fa-solid fa-signal" style={{ marginRight:'6px' }} />Live Traction
                         </span>
-                        <h2 style={{ color:'var(--dark)', marginTop:'1rem', marginBottom:'0.5rem', fontSize:'clamp(1.8rem,4vw,2.4rem)' }}>Real numbers. Real impact.</h2>
+                        <h2 style={{ color:'var(--dark)', marginTop:'1rem', marginBottom:'0.5rem', fontSize:'clamp(1.8rem,4vw,2.4rem)' }}>Be among the first to report in your city.</h2>
                         <p style={{ color:'var(--gray-500)', fontSize:'1rem' }}>Updated live from our production database.</p>
                     </div>
 

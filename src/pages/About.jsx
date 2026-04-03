@@ -10,28 +10,44 @@ export default function About() {
                 </div>
 
                 {/* Section 1: Empowering Citizens */}
-                <div className="grid grid-cols-1 grid-cols-2" style={{ alignItems: 'center', marginBottom: 'var(--space-16)' }}>
+                <div className="grid grid-cols-1 grid-cols-2" style={{ alignItems: 'center', marginBottom: 'var(--space-16)', gap: '4rem' }}>
                     <div style={{ order: 2 }}>
-                        <img 
-                            src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                            alt="Cleanup Mission" 
-                            style={{ borderRadius: 'var(--radius-2xl)', boxShadow: 'var(--shadow-lg)' }}
-                        />
+                        <div style={{ position: 'relative' }}>
+                            <img 
+                                src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                alt="Cleanup Mission" 
+                                style={{ borderRadius: 'var(--radius-2xl)', boxShadow: 'var(--shadow-lg)', width: '100%' }}
+                            />
+                            {/* AI Detection Preview */}
+                            <div style={{ position: 'absolute', bottom: '20px', left: '-20px', background: '#fff', padding: '15px', borderRadius: '15px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)', border: '1px solid #eef2f3', width: '220px' }}>
+                                <p style={{ fontSize: '0.65rem', fontWeight: '800', color: '#10b981', marginBottom: '8px', textTransform: 'uppercase' }}>WasteKI Analysis</p>
+                                <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981' }} />
+                                    <span style={{ fontSize: '0.85rem', fontWeight: '700' }}>W02 Rigid Plastic</span>
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '8px', fontSize: '0.7rem', color: '#94a3b8' }}>
+                                    <span>Severity: 8</span>
+                                    <span>Value: ₹13/kg</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div style={{ order: 1 }}>
-                        <span className="pill-success" style={{ marginBottom: 'var(--space-4)', display: 'inline-block' }}>Who We Are</span>
-                        <h2 style={{ marginBottom: 'var(--space-4)' }}>Empowering Citizens. <br /><span style={{ color: 'var(--primary)' }}>Cleaning India.</span></h2>
-                        <p style={{ color: 'var(--gray-600)', marginBottom: 'var(--space-6)' }}>
-                            <strong>Make India Beautiful Again (MIBA)</strong> is a national grassroots organization dedicated to eliminating illegal dumping and littering across all communities.
+                        <span className="pill-success" style={{ marginBottom: 'var(--space-4)', display: 'inline-block' }}>Proprietary Tech</span>
+                        <h2 style={{ marginBottom: 'var(--space-4)' }}>Powered by <span style={{ color: 'var(--primary)' }}>WasteKI.</span></h2>
+                        <p style={{ color: 'var(--gray-600)', marginBottom: 'var(--space-6)', lineHeight: '1.7' }}>
+                            Powered by <b>WasteKI</b> computer vision. Our <b>YOLOv9</b> detection engine identifies waste objects in real time. <b>EfficientNet-B3</b> classifies into 16 IndicWaste categories. <b>MiDaS</b> depth estimation calculates volume and weight instantly from a single photo.
                         </p>
-                        <div className="grid grid-cols-2">
+                        <div className="grid grid-cols-2" style={{ gap: '20px' }}>
                             <div>
-                                <i className="fa-solid fa-handshake-angle" style={{ fontSize: '1.5rem', color: 'var(--secondary)', marginBottom: 'var(--space-2)' }}></i>
-                                <h4 style={{ fontSize: '0.875rem' }}>Community Driven</h4>
+                                <i className="fa-solid fa-microchip" style={{ fontSize: '1.5rem', color: 'var(--primary)', marginBottom: 'var(--space-2)' }}></i>
+                                <h4 style={{ fontSize: '0.875rem', fontWeight: '800' }}>16 Waste Types</h4>
+                                <p style={{ fontSize: '0.75rem', color: '#94a3b8' }}>Plastic, metal, organic, e-waste, and more.</p>
                             </div>
                             <div>
-                                <i className="fa-solid fa-leaf" style={{ fontSize: '1.5rem', color: 'var(--primary)', marginBottom: 'var(--space-2)' }}></i>
-                                <h4 style={{ fontSize: '0.875rem' }}>Sustainable Focus</h4>
+                                <i className="fa-solid fa-bolt" style={{ fontSize: '1.5rem', color: 'var(--secondary)', marginBottom: 'var(--space-2)' }}></i>
+                                <h4 style={{ fontSize: '0.875rem', fontWeight: '800' }}>Instant Value</h4>
+                                <p style={{ fontSize: '0.75rem', color: '#94a3b8' }}>Severity score and ₹ value shown instantly.</p>
                             </div>
                         </div>
                     </div>

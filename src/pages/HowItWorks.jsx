@@ -36,7 +36,7 @@ export default function HowItWorks() {
                         </div>
                         <h3>3. Earn & Verify</h3>
                         <p style={{ color: 'var(--gray-600)', fontSize: '0.9375rem' }}>
-                            The collector clears the waste. WasteKI Supervisor verifies GPS track and photo evidence. Tokens are issued to the collector. You get notified: your report is cleared.
+                            The collector clears the waste. The WasteKI Supervisor verifies GPS track + photo evidence. Tokens are issued to the collector. You get a notification: your report is cleared.
                         </p>
                     </div>
                     <div className="card" style={{ textAlign: 'center' }}>

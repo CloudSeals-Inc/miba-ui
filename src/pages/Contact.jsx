@@ -23,10 +23,10 @@ export default function Contact() {
                         <h2 style={{ marginBottom: 'var(--space-8)' }}>Get in Touch</h2>
 
                         <div style={{ display: 'flex', gap: 'var(--space-4)', marginBottom: 'var(--space-8)' }}>
-                            <div style={{ color: 'var(--primary)', fontSize: '1.25rem' }}><i className="fa-solid fa-location-dot"></i></div>
+                            <div style={{ color: 'var(--primary)', fontSize: '1.25rem' }}><i className="fa-solid fa-building-circle-check"></i></div>
                             <div>
-                                <h4 style={{ marginBottom: '4px' }}>Headquarters</h4>
-                                <p style={{ fontSize: '0.875rem', color: 'var(--gray-600)' }}>123 Green Earth Building, Sector 45, New Delhi</p>
+                                <h4 style={{ marginBottom: '4px' }}>Presence</h4>
+                                <p style={{ fontSize: '0.875rem', color: 'var(--gray-600)' }}>India & UK operations</p>
                             </div>
                         </div>
 
@@ -34,7 +34,7 @@ export default function Contact() {
                             <div style={{ color: 'var(--primary)', fontSize: '1.25rem' }}><i className="fa-solid fa-envelope"></i></div>
                             <div>
                                 <h4 style={{ marginBottom: '4px' }}>Email Us</h4>
-                                <p style={{ fontSize: '0.875rem', color: 'var(--gray-600)' }}>contact@miba.com</p>
+                                <p style={{ fontSize: '0.875rem', color: 'var(--gray-600)' }}>srinivas@cloudseals.com</p>
                             </div>
                         </div>
 
