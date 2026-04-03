@@ -62,7 +62,7 @@ export default function Dashboard() {
                 </div>
 
                 {/* Stats Section */}
-                <div className="grid grid-cols-2 grid-cols-4" style={{ marginBottom: 'var(--space-8)' }}>
+                <div className="grid grid-cols-4" style={{ marginBottom: 'var(--space-8)' }}>
                     <div className="card" style={{ padding: 'var(--space-4)' }}>
                         <p style={{ fontSize: '0.65rem', fontWeight: '800', color: 'var(--gray-500)', textTransform: 'uppercase' }}>Total</p>
                         <p style={{ fontSize: '1.25rem', fontWeight: '800' }}>{stats.total}</p>
@@ -103,13 +103,13 @@ export default function Dashboard() {
                     <div className="grid grid-cols-1">
                         {filteredReports.map(report => (
                             <div key={report.id} className="card" style={{ padding: 0, overflow: 'hidden' }}>
-                                <div style={{ display: 'flex' }}>
-                                    <div style={{ position: 'relative', width: '120px' }}>
+                                <div className="flex-col-mob" style={{ display: 'flex' }}>
+                                    <div className="w-full-mob" style={{ position: 'relative', width: '120px', minHeight: '120px' }}>
                                         <img src={report.imageUrl} alt="Before" onError={e => e.target.src = 'https://placehold.co/600x400/e2e8f0/64748b?text=No+Image'} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                         <span style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(0,0,0,0.5)', color: 'white', fontSize: '0.6rem', textAlign: 'center', padding: '2px' }}>BEFORE</span>
                                     </div>
                                     {report.status.toLowerCase() === 'cleaned' && report.afterImageUrl && (
-                                        <div style={{ position: 'relative', width: '120px', borderLeft: '1px solid #fff' }}>
+                                        <div className="w-full-mob" style={{ position: 'relative', width: '120px', borderLeft: '1px solid #fff' }}>
                                             <img src={report.afterImageUrl} alt="After" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                             <span style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'var(--success)', color: 'white', fontSize: '0.6rem', textAlign: 'center', padding: '2px' }}>AFTER ✓</span>
                                         </div>

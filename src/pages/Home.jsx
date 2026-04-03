@@ -61,11 +61,11 @@ export default function Home() {
                 <div style={{ position:'absolute', top:'40%', left:'30%', width:'400px', height:'400px', borderRadius:'50%', background:'radial-gradient(circle,rgba(16,185,129,0.04) 0%,transparent 70%)', pointerEvents:'none' }} />
 
                 <div className="container" style={{ position:'relative', zIndex:1 }}>
-                    <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'4rem', alignItems:'center' }}>
+                    <div className="flex-col-mob" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'4rem', alignItems:'center' }}>
 
                         {/* LEFT — copy */}
-                        <div>
-                            <div style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'rgba(16,185,129,0.12)', border:'1px solid rgba(16,185,129,0.3)', borderRadius:'99px', padding:'5px 14px', fontSize:'0.72rem', fontWeight:'700', color:'#6ee7b7', letterSpacing:'0.08em', textTransform:'uppercase', marginBottom:'1.75rem' }}>
+                        <div className="text-center-mob">
+                            <div style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'rgba(16,185,129,0.12)', border:'1px solid rgba(16,185,129,0.3)', borderRadius:'99px', padding:'5px 14px', fontSize:'0.72rem', fontWeight:'700', color:'#10b981', letterSpacing:'0.08em', textTransform:'uppercase', marginBottom:'1.75rem' }}>
                                 <span style={{ width:'6px', height:'6px', borderRadius:'50%', background:'#34d399', boxShadow:'0 0 8px #34d399', display:'inline-block', animation:'pulse 2s infinite' }} />
                                 Smart Sustainability Platform
                             </div>
@@ -77,17 +77,17 @@ export default function Home() {
                                 </span>
                             </h1>
 
-                            <p style={{ fontSize:'1.1rem', color:'var(--gray-600)', lineHeight:1.75, marginBottom:'2.5rem', maxWidth:'500px' }}>
+                            <p style={{ fontSize:'1.1rem', color:'var(--gray-600)', lineHeight:1.75, marginBottom:'2.5rem', maxWidth:'500px', marginLeft: 'auto', marginRight: 'auto' }}>
                                 MIBA turns every piece of unprocessed waste into a structured data event — with AI-verified category, weight, ₹ scrap value, carbon credit, and a municipal work order. All in under 3 seconds.
                             </p>
 
-                            <div style={{ display:'flex', gap:'12px', flexWrap:'wrap', marginBottom:'3rem' }}>
-                                <Link to="/report" style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'linear-gradient(135deg,#10b981,#059669)', color:'#fff', fontWeight:'700', fontSize:'0.95rem', padding:'14px 26px', borderRadius:'12px', boxShadow:'0 8px 28px rgba(16,185,129,0.4)', textDecoration:'none', transition:'transform 0.2s,box-shadow 0.2s' }}
+                            <div style={{ display:'flex', gap:'12px', flexWrap:'wrap', marginBottom:'3rem', justifyContent: 'inherit' }}>
+                                <Link to="/report" className="w-full-mob" style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'linear-gradient(135deg,#10b981,#059669)', color:'#fff', fontWeight:'700', fontSize:'0.95rem', padding:'14px 26px', borderRadius:'12px', boxShadow:'0 8px 28px rgba(16,185,129,0.4)', textDecoration:'none', transition:'transform 0.2s,box-shadow 0.2s', justifyContent: 'center' }}
                                     onMouseEnter={e=>{e.currentTarget.style.transform='translateY(-2px)';e.currentTarget.style.boxShadow='0 14px 36px rgba(16,185,129,0.5)'}}
                                     onMouseLeave={e=>{e.currentTarget.style.transform='';e.currentTarget.style.boxShadow='0 8px 28px rgba(16,185,129,0.4)'}}>
                                     <i className="fa-solid fa-camera" /> Try Live Demo
                                 </Link>
-                                <Link to="/about" style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'var(--gray-100)', border:'1px solid var(--gray-200)', color:'var(--dark)', fontWeight:'600', fontSize:'0.95rem', padding:'14px 26px', borderRadius:'12px', textDecoration:'none', transition:'all 0.2s' }}
+                                <Link to="/about" className="w-full-mob" style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'var(--gray-100)', border:'1px solid var(--gray-200)', color:'var(--dark)', fontWeight:'600', fontSize:'0.95rem', padding:'14px 26px', borderRadius:'12px', textDecoration:'none', transition:'all 0.2s', justifyContent: 'center' }}
                                     onMouseEnter={e=>e.currentTarget.style.background='var(--gray-200)'}
                                     onMouseLeave={e=>e.currentTarget.style.background='var(--gray-100)'}>
                                     Our Mission <i className="fa-solid fa-arrow-right" />
@@ -351,9 +351,9 @@ export default function Home() {
             </section>
 
             <style>{`
-                @media (max-width: 768px) {
-                    .hero-grid { grid-template-columns: 1fr !important; }
-                    .hero-grid > div:last-child { display: none; }
+                @media (max-width: 900px) {
+                    .flex-col-mob { display: flex !important; flex-direction: column !important; gap: 2.5rem !important; }
+                    .text-center-mob { text-align: center !important; }
                 }
                 @keyframes pulse {
                     0%, 100% { opacity: 1; } 50% { opacity: 0.4; }

@@ -100,7 +100,7 @@ export default function CollectorDashboard() {
         <div className="page-container animate-fade" style={{ background: '#0e1117', color: '#e6edf3', minHeight: '100vh' }}>
             <div className="container" style={{ maxWidth: '600px', padding: 'var(--space-8) var(--space-4)' }}>
                 {/* Header Stats */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', background: '#161b22', padding: '20px', borderRadius: '20px', border: '1px solid #30363d' }}>
+                <div className="flex-col-mob" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', background: '#161b22', padding: '20px', borderRadius: '20px', border: '1px solid #30363d', gap: '15px' }}>
                     <div>
                         <p style={{ fontSize: '0.75rem', opacity: 0.6, textTransform: 'uppercase', fontWeight: '800' }}>My Earnings</p>
                         <h2 style={{ color: 'var(--primary)', fontSize: '2rem' }}>₹{user.wallet || 0}</h2>
@@ -129,7 +129,7 @@ export default function CollectorDashboard() {
                     </div>
                 ) : isVerifying ? (
                     <div className="card animate-slide-up" style={{ background: '#161b22', border: '1px solid #30363d' }}>
-                        <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+                        <div className="flex-col-mob" style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
                             <div style={{ flex: 1 }}>
                                 <p style={{ fontSize: '0.65rem', fontWeight: '800', opacity: 0.5, marginBottom: '5px' }}>BEFORE</p>
                                 <img src={activeTask.imageUrl} onError={e => e.target.src = 'https://placehold.co/600x400/e2e8f0/64748b?text=No+Image'} style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '10px' }} alt="Before" />
@@ -222,8 +222,8 @@ export default function CollectorDashboard() {
                             </div>
                         ) : assignedReports.map(task => (
                             <div key={task.id} className="card" style={{ background: '#161b22', border: '1px solid #30363d', color: 'white', padding: 0, overflow: 'hidden' }}>
-                                <div style={{ display: 'flex' }}>
-                                    <img src={task.imageUrl} onError={e => e.target.src = 'https://placehold.co/600x400/e2e8f0/64748b?text=No+Image'} style={{ width: '140px', height: '160px', objectFit: 'cover' }} alt="Waste" />
+                                <div className="flex-col-mob" style={{ display: 'flex' }}>
+                                    <img className="w-full-mob" src={task.imageUrl} onError={e => e.target.src = 'https://placehold.co/600x400/e2e8f0/64748b?text=No+Image'} style={{ width: '140px', height: '160px', objectFit: 'cover' }} alt="Waste" />
                                     <div style={{ flex: 1, padding: '15px' }}>
                                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
                                             <span style={{ color: 'var(--primary)', fontWeight: '800', fontSize: '0.75rem' }}>{task.workOrderId || 'WO-PENDING'}</span>
