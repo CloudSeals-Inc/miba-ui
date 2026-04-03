@@ -71,10 +71,7 @@ export default function Header() {
 
                         {/* Logo */}
                         <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'linear-gradient(135deg,#10b981,#065f46)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <i className="fa-solid fa-leaf" style={{ color: '#fff', fontSize: '0.9rem' }} />
-                            </div>
-                            <span style={{ fontFamily: "'Outfit',sans-serif", fontSize: '1.3rem', fontWeight: '900', color: '#065f46', letterSpacing: '-0.02em' }}>
+                            <span style={{ fontFamily: "'Outfit',sans-serif", fontSize: '1.4rem', fontWeight: '900', color: '#065f46', letterSpacing: '-0.02em' }}>
                                 MIBA<span style={{ color: '#f59e0b' }}>.</span>
                             </span>
                         </Link>

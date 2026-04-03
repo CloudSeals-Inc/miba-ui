@@ -12,9 +12,6 @@ export default function Footer() {
                     {/* Brand */}
                     <div style={{ gridColumn: 'span 1' }}>
                         <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1rem' }}>
-                            <div style={{ width: '34px', height: '34px', borderRadius: '9px', background: 'linear-gradient(135deg,#10b981,#065f46)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                                <i className="fa-solid fa-leaf" style={{ color: '#fff', fontSize: '0.9rem' }} />
-                            </div>
                             <span style={{ fontFamily: "'Outfit',sans-serif", fontSize: '1.4rem', fontWeight: '900', color: '#fff', letterSpacing: '-0.02em' }}>
                                 MIBA<span style={{ color: '#f59e0b' }}>.</span>
                             </span>

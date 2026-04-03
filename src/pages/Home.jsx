@@ -71,9 +71,9 @@ export default function Home() {
                             </div>
 
                             <h1 style={{ fontSize:'clamp(2.6rem,5vw,4.2rem)', fontWeight:'900', lineHeight:1.05, color:'#fff', fontFamily:"'Outfit',sans-serif", marginBottom:'1.5rem', letterSpacing:'-0.02em' }}>
-                                India's Waste Crisis<br />
+                                Make India<br />
                                 <span style={{ background:'linear-gradient(90deg,#34d399 0%,#6ee7b7 50%,#fbbf24 100%)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>
-                                    is an Opportunity.
+                                    Beautiful Again.
                                 </span>
                             </h1>
 
@@ -101,8 +101,7 @@ export default function Home() {
                             <div style={{ width:'100%', maxWidth:'360px', background:'rgba(255,255,255,0.05)', border:'1px solid rgba(255,255,255,0.12)', borderRadius:'24px', padding:'20px', backdropFilter:'blur(20px)', boxShadow:'0 40px 80px rgba(0,0,0,0.4)' }}>
                                 {/* Header */}
                                 <div style={{ display:'flex', alignItems:'center', gap:'10px', marginBottom:'16px' }}>
-                                    <div style={{ width:'8px', height:'8px', borderRadius:'50%', background:'#34d399', boxShadow:'0 0 8px #34d399' }} />
-                                    <span style={{ fontSize:'0.75rem', color:'#6ee7b7', fontWeight:'700', letterSpacing:'0.05em' }}>MIBA AI · LIVE SCAN</span>
+                                    <span style={{ fontSize:'0.75rem', color:'#6ee7b7', fontWeight:'700', letterSpacing:'0.05em' }}>MIBA. AI · LIVE SCAN</span>
                                 </div>
 
                                 {/* Image placeholder */}
