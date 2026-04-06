@@ -234,7 +234,7 @@ export default function Report() {
                                     <>
                                         <p style={{ color: '#0ea5e9', marginBottom: '8px', fontFamily: 'monospace' }}>{"> "} Analysis complete.</p>
                                         <div style={{ color: '#10b981', fontWeight: 'bold', marginBottom: '8px', fontFamily: 'monospace' }}>[DETECTION SUCCESS]</div>
-                                        {aiAnalysis.grand_total_value_inr > 0 && (
+                                        {(aiAnalysis.grand_total_value_inr > 0 || aiAnalysis.total_weight_kg_estimate > 0) && (
                                             <div style={{ background: 'linear-gradient(135deg, #064e3b, #065f46)', borderRadius: '12px', padding: '14px 18px', marginBottom: '8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                                 <div>
                                                     <p style={{ color: '#6ee7b7', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '1px', margin: 0 }}>ESTIMATED VALUE</p>
