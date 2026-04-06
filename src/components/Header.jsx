@@ -1,5 +1,5 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { getUserSession, logoutUser, getReports, calculateUserStats } from '../utils/storage';
+import { getUserSession, logoutUser, getReports, calculateUserStats, isMobileDevice } from '../utils/storage';
 import { useState, useEffect } from 'react';
 
 export default function Header() {
@@ -94,18 +94,20 @@ export default function Header() {
 
                         {/* Right — CTA + Profile */}
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <Link to="/report" className="desk-nav" style={{
-                                display: 'inline-flex', alignItems: 'center', gap: '6px',
-                                background: 'linear-gradient(135deg,#10b981,#059669)',
-                                color: '#fff', fontWeight: '700', fontSize: '0.82rem',
-                                padding: '8px 16px', borderRadius: '9px',
-                                boxShadow: '0 4px 12px rgba(16,185,129,0.35)',
-                                textDecoration: 'none', transition: 'transform 0.15s, box-shadow 0.15s',
-                            }}
-                                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 6px 18px rgba(16,185,129,0.45)'; }}
-                                onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 4px 12px rgba(16,185,129,0.35)'; }}>
-                                <i className="fa-solid fa-camera" /> Report
-                            </Link>
+                            {isMobileDevice() && (
+                                <Link to="/report" className="desk-nav" style={{
+                                    display: 'inline-flex', alignItems: 'center', gap: '6px',
+                                    background: 'linear-gradient(135deg,#10b981,#059669)',
+                                    color: '#fff', fontWeight: '700', fontSize: '0.82rem',
+                                    padding: '8px 16px', borderRadius: '9px',
+                                    boxShadow: '0 4px 12px rgba(16,185,129,0.35)',
+                                    textDecoration: 'none', transition: 'transform 0.15s, box-shadow 0.15s',
+                                }}
+                                    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 6px 18px rgba(16,185,129,0.45)'; }}
+                                    onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 4px 12px rgba(16,185,129,0.35)'; }}>
+                                    <i className="fa-solid fa-camera" /> Report
+                                </Link>
+                            )}
 
                             {user ? (
                                 <div className="profile-trigger" style={{ position: 'relative' }}>
@@ -160,7 +162,7 @@ export default function Header() {
                                                     { to: '/dashboard', icon: 'fa-gauge',       color: '#10b981', label: 'My Dashboard' },
                                                     { to: '/collector', icon: 'fa-truck-pickup', color: '#059669', label: 'Collector Portal' },
                                                     { to: '/report',    icon: 'fa-camera',       color: '#f59e0b', label: 'Report Waste' },
-                                                ].map(l => (
+                                                ].filter(l => l.to !== '/report' || isMobileDevice()).map(l => (
                                                     <Link key={l.to} to={l.to} onClick={() => setProfileOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '10px 12px', borderRadius: '10px', fontSize: '0.85rem', fontWeight: '600', color: '#374151', textDecoration: 'none', transition: 'background 0.12s' }}
                                                         onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'}
                                                         onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>

@@ -147,6 +147,28 @@ export default function Report() {
 
     if (!user) return null;
 
+    if (!isMobileDevice()) {
+        return (
+            <div className="page-container animate-fade" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f8fafc', padding: '2rem' }}>
+                <div className="container" style={{ maxWidth: '500px', textAlign: 'center' }}>
+                    <div className="card" style={{ padding: 'var(--space-12)', boxShadow: '0 20px 50px rgba(0,0,0,0.05)', borderRadius: '24px', border: '1px solid #e2e8f0' }}>
+                        <div style={{ width: '80px', height: '80px', borderRadius: '20px', background: '#fef2f2', color: '#ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem', margin: '0 auto 1.5rem' }}>
+                            <i className="fa-solid fa-mobile-screen-button" />
+                        </div>
+                        <h2 style={{ fontWeight: '900', color: '#0f172a', marginBottom: '1rem', fontSize: '1.75rem' }}>Mobile App Required</h2>
+                        <p style={{ color: '#475569', lineHeight: '1.6', marginBottom: '2rem' }}>
+                            To ensure accurate GIS location data and high-quality photo evidence, waste reporting is restricted to mobile devices.
+                        </p>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                            <Link to="/dashboard" className="btn btn-primary" style={{ width: '100%', padding: '1rem' }}>Go to Dashboard</Link>
+                            <p style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Please open MIBA on your smartphone to report waste.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="page-container animate-fade" style={{ background: 'var(--gray-100)', paddingBottom: '4rem' }}>
             <div className="container" style={{ maxWidth: '600px', padding: 'var(--space-6) var(--space-4)' }}>
