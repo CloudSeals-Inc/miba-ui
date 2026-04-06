@@ -15,7 +15,7 @@ export default function Header() {
         const session = getUserSession();
         setUser(session);
         if (session) {
-            const r = await getReports();
+            const r = await getReports(session.phone, session.role);
             setStats(calculateUserStats(session.phone, r));
         }
     };
