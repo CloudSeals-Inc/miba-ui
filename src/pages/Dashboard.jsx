@@ -19,12 +19,15 @@ export default function Dashboard() {
         setIsLoading(false);
     };
 
+    const [user, setUser] = useState(null);
+
     useEffect(() => {
         const session = getUserSession();
         if (session?.role === 'collector') {
             navigate('/collector');
             return;
         }
+        setUser(session);
         fetchReports(session);
     }, [navigate]);
 
@@ -37,7 +40,7 @@ export default function Dashboard() {
             });
             alert("Thank you for rating!");
             setRatingId(null);
-            fetchReports();
+            fetchReports(user);
         } catch (err) {
             alert("Rating failed");
         }
