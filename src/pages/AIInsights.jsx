@@ -164,6 +164,7 @@ export default function AIInsights() {
         try {
             const res = await fetch(`${API_BASE_URL}/ai/analytics?${params.toString()}`, { signal: controller.signal });
             const data = await res.json();
+            console.log("[DEBUG] Analytics fetch for phone:", user?.phone, "received:", data);
             setAnalytics(data);
             clearTimeout(timeoutId);
         } catch (e) {
@@ -209,7 +210,7 @@ export default function AIInsights() {
         </div>
     );
 
-    const { summary = {}, agentReports = {}, aiInsights = '' } = analytics || {};
+    const { summary = {}, agentReports = {}, aiInsights = '', debug_version = '' } = analytics || {};
 
     const cityEntries = Object.entries(summary.cities || {}).sort((a, b) => b[1] - a[1]);
     const sevEntries = Object.entries(summary.severities || {});
@@ -238,6 +239,7 @@ export default function AIInsights() {
                             </h1>
                             <p style={{ color: 'var(--gray-600)', fontSize: '1rem', maxWidth: '500px', lineHeight: 1.6 }}>
                                 WasteKI Multi-Agent Intelligence · 6 specialist agents analyzing {summary.total || 0} waste reports in real-time to generate strategic environmental intelligence.
+                                {debug_version && <span style={{ display: 'block', fontSize: '0.65rem', color: '#94a3b8', marginTop: '8px', fontWeight: '800' }}>SYS-VER: {debug_version}</span>}
                             </p>
                         </div>
                         <button onClick={fetchAnalytics} style={{ background: 'var(--gray-100)', border: '1px solid var(--gray-200)', color: 'var(--dark)', padding: '10px 20px', borderRadius: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: '700', fontSize: '0.85rem', flexShrink: 0 }}>
