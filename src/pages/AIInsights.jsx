@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { API_BASE_URL } from '../utils/storage';
+import { API_BASE_URL, getUserSession } from '../utils/storage';
 
 // ─── SVG Sparkline Chart ──────────────────────────────────────────────────────
 function SparklineChart({ data }) {
@@ -155,10 +155,14 @@ export default function AIInsights() {
 
     const fetchAnalytics = async () => {
         setIsLoading(true);
+        const user = getUserSession();
+        const params = new URLSearchParams();
+        if (user) { params.append('phone', user.phone); params.append('role', user.role); }
+
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
         try {
-            const res = await fetch(`${API_BASE_URL}/ai/analytics`, { signal: controller.signal });
+            const res = await fetch(`${API_BASE_URL}/ai/analytics?${params.toString()}`, { signal: controller.signal });
             const data = await res.json();
             setAnalytics(data);
             clearTimeout(timeoutId);

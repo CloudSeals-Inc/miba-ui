@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getUserSession, getReports, API_BASE_URL } from '../utils/storage';
+import { getUserSession, getReports, API_BASE_URL, isMobileDevice } from '../utils/storage';
 
 
 export default function CollectorDashboard() {
@@ -24,16 +24,16 @@ export default function CollectorDashboard() {
                 return;
             }
             setUser(session);
-            loadTasks();
+            loadTasks(session);
             // Auto refresh every 30 seconds
-            const interval = setInterval(loadTasks, 30000);
+            const interval = setInterval(() => loadTasks(session), 30000);
             return () => clearInterval(interval);
         }
     }, [navigate]);
 
-    const loadTasks = async () => {
+    const loadTasks = async (currentUser) => {
         setIsLoading(true);
-        const data = await getReports();
+        const data = await getReports(currentUser?.phone, currentUser?.role);
         // Case-insensitive status check
         setAssignedReports(data.filter(r =>
             r.status.toLowerCase() === 'pending' ||
@@ -136,7 +136,12 @@ export default function CollectorDashboard() {
                             </div>
                             <div style={{ flex: 1 }}>
                                 <p style={{ fontSize: '0.65rem', fontWeight: '800', color: 'var(--primary)', marginBottom: '5px' }}>AFTER (UPLOAD)</p>
-                                {!afterImage ? (
+                                {!isMobileDevice() ? (
+                                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '120px', width: '100%', background: '#0d1117', border: '1px solid #30363d', borderRadius: '10px', color: '#8b949e', padding: '10px' }}>
+                                        <i className="fa-solid fa-mobile-screen-button" style={{ fontSize: '1.5rem', marginBottom: '8px' }}></i>
+                                        <p style={{ fontSize: '0.65rem', textAlign: 'center', fontWeight: '700' }}>Verification required on mobile device</p>
+                                    </div>
+                                ) : !afterImage ? (
                                     <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '120px', width: '100%', background: '#0d1117', border: '2px dashed #30363d', borderRadius: '10px', cursor: 'pointer' }}>
                                         <i className="fa-solid fa-camera"></i>
                                         <input type="file" accept="image/*" onChange={handleAfterPhoto} style={{ display: 'none' }} />
@@ -148,10 +153,12 @@ export default function CollectorDashboard() {
                         </div>
 
                         <h3 style={{ color: 'white', marginBottom: '0.5rem' }}>Verify Cleanup</h3>
-                        <p style={{ fontSize: '0.85rem', color: '#8b949e', marginBottom: '1.5rem' }}>Submit the 'After' photo to complete this work order.</p>
+                        <p style={{ fontSize: '0.85rem', color: '#8b949e', marginBottom: '1.5rem' }}>
+                            {!isMobileDevice() ? 'Please open the MIBA app on your phone to capture the "After" photo and complete this task.' : "Submit the 'After' photo to complete this work order."}
+                        </p>
 
-                        <button onClick={completeWorkOrder} className="btn btn-primary" disabled={isLoading} style={{ width: '100%', padding: '1.25rem' }}>
-                            {isLoading ? 'VERIFYING LOCATION...' : 'COMPLETE & COLLECT YOUR SHARE'}
+                        <button onClick={completeWorkOrder} className="btn btn-primary" disabled={isLoading || !isMobileDevice()} style={{ width: '100%', padding: '1.25rem' }}>
+                            {!isMobileDevice() ? 'SWITCH TO MOBILE TO COMPLETE' : (isLoading ? 'VERIFYING LOCATION...' : 'COMPLETE & COLLECT YOUR SHARE')}
                         </button>
                     </div>
                 ) : completedTask ? (

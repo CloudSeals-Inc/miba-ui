@@ -10,9 +10,9 @@ export default function Dashboard() {
     const [isLoading, setIsLoading] = useState(true);
     const [ratingId, setRatingId] = useState(null);
 
-    const fetchReports = async () => {
+    const fetchReports = async (user) => {
         setIsLoading(true);
-        const data = await getReports();
+        const data = await getReports(user?.phone, user?.role);
         setReports(data);
         setIsLoading(false);
     };
@@ -23,7 +23,7 @@ export default function Dashboard() {
             navigate('/collector');
             return;
         }
-        fetchReports();
+        fetchReports(session);
     }, [navigate]);
 
     const submitRating = async (id, rating) => {

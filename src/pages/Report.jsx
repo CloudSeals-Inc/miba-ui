@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { getUserSession, saveReport, getReports, API_BASE_URL } from '../utils/storage';
+import { getUserSession, saveReport, getReports, API_BASE_URL, isMobileDevice } from '../utils/storage';
 
 
 export default function Report() {
@@ -172,6 +172,12 @@ export default function Report() {
                                         </button>
                                         <button onClick={() => { setImageUrl(''); setAiAnalysis(null); }} style={{ background: 'rgba(239, 68, 68, 0.9)', color: 'white', border: 'none', borderRadius: '50%', width: '28px', height: '28px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>×</button>
                                     </div>
+                                </div>
+                            ) : !isMobileDevice() ? (
+                                <div className="card" style={{ padding: 'var(--space-10)', textAlign: 'center', background: '#fef2f2', border: '1px solid #fecaca' }}>
+                                    <i className="fa-solid fa-mobile-screen-button" style={{ fontSize: '3rem', color: '#ef4444', marginBottom: '1rem' }}></i>
+                                    <h3 style={{ color: '#991b1b', marginBottom: '0.5rem', fontWeight: '800' }}>Mobile Only Feature</h3>
+                                    <p style={{ fontSize: '0.85rem', color: '#b91c1c', lineHeight: '1.5' }}>To ensure accurate GIS location and high-quality photo evidence, waste reporting is restricted to mobile devices. Please open MIBA on your smartphone to continue.</p>
                                 </div>
                             ) : (
                                 <div className="grid grid-cols-2" style={{ gap: '1rem' }}>

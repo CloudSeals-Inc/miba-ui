@@ -13,10 +13,17 @@ export function logoutUser() {
     localStorage.removeItem('miba_user');
 }
 
+export function isMobileDevice() {
+    return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+}
+
 const STATUS_MAP = { OPEN: 'pending', ASSIGNED: 'assigned', CLOSED: 'cleaned' };
 
-export async function getReports() {
-    const response = await fetch(`${API_BASE_URL}/reports`);
+export async function getReports(phone, role) {
+    const params = new URLSearchParams();
+    if (phone) params.append('phone', phone);
+    if (role) params.append('role', role);
+    const response = await fetch(`${API_BASE_URL}/reports?${params.toString()}`);
     if (!response.ok) return [];
     const data = await response.json();
     return (Array.isArray(data) ? data : []).map(wo => ({
