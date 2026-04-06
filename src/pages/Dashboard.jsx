@@ -12,8 +12,10 @@ export default function Dashboard() {
 
     const fetchReports = async (user) => {
         setIsLoading(true);
+        console.log("[DEBUG-ISOLATION] Dashboard fetch for phone:", user?.phone, "role:", user?.role);
         const data = await getReports(user?.phone, user?.role);
         setReports(data);
+        console.log("[DEBUG-ISOLATION] Data received:", data.length, "items.");
         setIsLoading(false);
     };
 
